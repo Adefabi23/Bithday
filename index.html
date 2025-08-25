@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armani & Ameerah's First Year</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            color: #555;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 30% 70%, rgba(255, 218, 224, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .header-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .rattle {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .rattle:nth-child(1) {
+            top: 10px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .rattle:nth-child(2) {
+            top: 20px;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .rattle:nth-child(3) {
+            bottom: 10px;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .rattle:nth-child(4) {
+            bottom: 20px;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #ff69b4;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ff85c1;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            margin: 0 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #ff69b4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            border-radius: 50px;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-tab.active {
+            color: white;
+        }
+
+        .nav-tab.active::before {
+            transform: scale(1);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline Gallery Styles */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff69b4, #ffb6c1);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-month {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .month-label {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .timeline-content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            width: 45%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: auto;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -60px;
+        }
+
+        .baby-name {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .baby-name i {
+            margin-right: 8px;
+            color: #ff85c1;
+        }
+
+        .media-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.2);
+        }
+
+        .protected-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        .media-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        /* Growth Tracker Styles */
+        .milestone-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .milestone-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.3);
+        }
+
+        .milestone-header {
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .milestone-header i {
+            margin-right: 8px;
+        }
+
+        .milestone-content {
+            padding: 20px;
+        }
+
+        .milestone-date {
+            font-size: 0.9rem;
+            color: #ff85c1;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .milestone-description {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .milestone-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* Guestbook Styles */
+        .guestbook-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .guestbook-form {
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ff69b4;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffe0f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff69b4;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+        }
+
+        .messages-container {
+            margin-top: 40px;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff69b4;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .message-card:hover {
+            transform: translateX(5px);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .message-author {
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .message-date {
+            font-size: 0.85rem;
+            color: #ff85c1;
+        }
+
+        .message-content {
+            line-height: 1.5;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Baby Footers */
+        .baby-footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .baby-icon {
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.5);
+            animation: bounce 2s infinite alternate;
+        }
+
+        .baby-icon:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .baby-icon:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timeline-item {
+                width: 90%;
+                margin-bottom: 30px;
+            }
+
+            .timeline-item::before {
+                left: -50px !important;
+            }
+
+            .milestone-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: rgba(255, 105, 180, 0.5);
+            z-index: 1000;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="header-decoration">
+                <div class="rattle"><i class="fas fa-baby"></i></div>
+                <div class="rattle"><i class="fas fa-baby-carriage"></i></div>
+                <div class="rattle"><i class="fas fa-bottle-baby"></i></div>
+                <div class="rattle"><i class="fas fa-baby"></i></div>
+            </div>
+            <h1>Armani & Ameerah</h1>
+            <p class="subtitle">Celebrating Our First Year</p>
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-section="gallery">Gallery</div>
+                <div class="nav-tab" data-section="milestones">Growth Tracker</div>
+                <div class="nav-tab" data-section="guestbook">Guestbook</div>
+            </div>
+        </header>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="content-section active">
+            <div class="timeline">
+                <!-- Month 1 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby1/600/400.jpg" alt="Armani Month 1"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Our first family photo</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby1/600/400.jpg" alt="Ameerah Month 1"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First smile captured</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 3 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby3/600/400.jpg" alt="Armani Month 3"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Tummy time adventures</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby3/600/400.jpg" alt="Ameerah Month 3"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First giggle session</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 6 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 6</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby6/600/400.jpg" alt="Armani Month 6"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First solid food</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby6/600/400.jpg" alt="Ameerah Month 6"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Sitting up on her own</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 9 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 9</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby9/600/400.jpg" alt="Armani Month 9"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Crawling everywhere</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby9/600/400.jpg" alt="Ameerah Month 9"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First words: "Mama"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month 12 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 12</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby12/600/400.jpg" alt="Armani Month 12"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First birthday celebration</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby12/600/400.jpg" alt="Ameerah Month 12"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Taking first steps</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Milestones Section -->
+        <section id="milestones" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Growth Tracker</h2>
+            <div class="milestone-container">
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-smile"></i> First Smile</div>
+                    <img src="https://picsum.photos/seed/babysmile/600/400.jpg" alt="First Smile"
+                        class="milestone-image">
+                    <div class="milestone-content">
+                        <div class="milestone-date">Week 6</div>
+                        <div class="milestone-description">Both Armani and Ameerah blessed us with their first smiles at
+                            the same time during a morning cuddle session.</div>
+                    </div>
+                </div>
+
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-sync-alt"></i> Rolling Over</div>
+                    <img src="https://picsum.photos/seed/babyrolling/600/400.jpg" alt="Rolling Over"
+                        class="milestone-image">
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 4</div>
+                        <div class="milestone-description">Armani was first to roll over, with Ameerah following just
+                            two days later. Now they can't stop!</div>
+                    </div>
+                </div>
+
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-utensils"></i> First Solid Food</div>
+                    <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
+                        class="milestone-image">
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 6</div>
+                        <div class="milestone-description">Both tried mashed sweet potatoes. Ameerah loved it, while
+                            Armani was a bit more hesitant.</div>
+                    </div>
+                </div>
+
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-comments"></i> First Words</div>
+                    <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
+                        class="milestone-image">
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 9</div>
+                        <div class="milestone-description">Ameerah said "Mama" first, while Armani's first word was
+                            "Dada". The competition continues!</div>
+                    </div>
+                </div>
+
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-baby"></i> Crawling</div>
+                    <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling" class="milestone-image">
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 8</div>
+                        <div class="milestone-description">Armani started the army crawl first, while Ameerah perfected
+                            the traditional crawl. Now they're everywhere!</div>
+                    </div>
+                </div>
+
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-walking"></i> First Steps</div>
+                    <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
+                        class="milestone-image">
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 12</div>
+                        <div class="milestone-description">Ameerah took her first steps just before their birthday, with
+                            Armani following a week later. Walking together now!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guestbook Section -->
+        <section id="guestbook" class="content-section">
+            <div class="guestbook-container">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Birthday Messages</h2>
+
+                <form class="guestbook-form" id="guestbook-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Birthday Message</label>
+                        <textarea id="message" name="message"
+                            placeholder="Leave a birthday message for Armani and Ameerah..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Post Message</button>
+                </form>
+
+                <div class="messages-container" id="messages-container">
+                    <div class="message-card">
+                        <div class="message-header">
+                            <span class="message-author">Grandma</span>
+                            <span class="message-date">Today</span>
+                        </div>
+                        <div class="message-content">
+                            Happy first birthday to our precious grandchildren! Watching you both grow this year has
+                            been the greatest joy. We love you more than words can say!
+                        </div>
+                    </div>
+
+                    <div class="message-card">
+                        <div class="message-header">
+                            <span class="message-author">Aunt Sarah</span>
+                            <span class="message-date">Today</span>
+                        </div>
+                        <div class="message-content">
+                            Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much
+                            happiness to our family. Can't wait to celebrate with you!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="baby-footer">
+            <div class="baby-icon"><i class="fas fa-baby"></i></div>
+            <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
+            <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
+        </div>
+    </div>
+
+    <div class="watermark">© Armani & Ameerah's First Year</div>
+
+    <script>
+        // Navigation tabs functionality
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const sectionId = tab.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // Confetti animation
+        function createConfetti(event) {
+            const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+
+                // Random properties
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 3 + 2;
+                const opacity = Math.random() * 0.5 + 0.5;
+
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${left}%`;
+                confetti.style.top = `${event.pageY - window.scrollY}px`;
+                confetti.style.opacity = opacity;
+                confetti.style.animationDuration = `${animationDuration}s`;
+
+                document.body.appendChild(confetti);
+
+                // Remove confetti after animation completes
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+
+        // Guestbook form submission
+        document.getElementById('guestbook-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+
+            if (name && message) {
+                // Create new message element
+                const messageCard = document.createElement('div');
+                messageCard.classList.add('message-card');
+
+                const currentDate = new Date();
+                const formattedDate = currentDate.toLocaleDateString();
+
+                messageCard.innerHTML = `
+                    <div class="message-header">
+                        <span class="message-author">${name}</span>
+                        <span class="message-date">${formattedDate}</span>
+                    </div>
+                    <div class="message-content">
+                        ${message}
+                    </div>
+                `;
+
+                // Add to messages container
+                const messagesContainer = document.getElementById('messages-container');
+                messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
+
+                // Reset form
+                this.reset();
+
+                // Create confetti effect
+                createConfetti({ pageY: window.innerHeight / 2 });
+            }
+        });
+
+        // Prevent right-click on images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('contextmenu', e => e.preventDefault());
+        });
+
+        // Disable print screen
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                alert('Screenshots are disabled on this page.');
+            }
+        });
+
+        // Add watermark overlay to images
+        document.querySelectorAll('.protected-image, .milestone-image').forEach(img => {
+            img.addEventListener('load', function () {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = this.naturalWidth;
+                canvas.height = this.naturalHeight;
+
+                ctx.drawImage(this, 0, 0);
+
+                // Add watermark
+                ctx.font = '20px Quicksand';
+                ctx.fillStyle = 'rgba(255, 105, 180, 0.5)';
+                ctx.textAlign = 'center';
+                ctx.fillText('© Armani & Ameerah', canvas.width / 2, canvas.height - 20);
+
+                // Replace image with watermarked version
+                this.src = canvas.toDataURL('image/jpeg');
+            });
+        });
+    </script>
+</body>
+
+</html>
