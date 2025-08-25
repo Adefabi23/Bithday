@@ -562,6 +562,26 @@
             color: #ff85c1;
         }
 
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.5s ease;
+            font-weight: 600;
+        }
+
+        .success-message.show {
+            transform: translateX(0);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
@@ -1017,27 +1037,7 @@
                 </form>
 
                 <div class="messages-container" id="messages-container">
-                    <div class="message-card">
-                        <div class="message-header">
-                            <span class="message-author">Grandma</span>
-                            <span class="message-date">Today</span>
-                        </div>
-                        <div class="message-content">
-                            Happy first birthday to our precious grandchildren! Watching you both grow this year has
-                            been the greatest joy. We love you more than words can say!
-                        </div>
-                    </div>
-
-                    <div class="message-card">
-                        <div class="message-header">
-                            <span class="message-author">Aunt Sarah</span>
-                            <span class="message-date">Today</span>
-                        </div>
-                        <div class="message-content">
-                            Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much
-                            happiness to our family. Can't wait to celebrate with you!
-                        </div>
-                    </div>
+                    <!-- Messages will be loaded here from localStorage -->
                 </div>
             </div>
         </section>
@@ -1054,6 +1054,10 @@
     </div>
 
     <div class="watermark">© Armani & Ameerah's First Year</div>
+
+    <div class="success-message" id="success-message">
+        <i class="fas fa-check-circle"></i> Your message has been saved successfully!
+    </div>
 
     <script>
         // Navigation tabs functionality
@@ -1102,6 +1106,84 @@
             }
         }
 
+        // Function to save messages to localStorage
+        function saveMessages(messages) {
+            localStorage.setItem('birthdayMessages', JSON.stringify(messages));
+        }
+
+        // Function to get messages from localStorage
+        function getMessages() {
+            const messages = localStorage.getItem('birthdayMessages');
+            return messages ? JSON.parse(messages) : [];
+        }
+
+        // Function to display messages
+        function displayMessages() {
+            const messagesContainer = document.getElementById('messages-container');
+            const messages = getMessages();
+
+            // Clear the container
+            messagesContainer.innerHTML = '';
+
+            // Add default messages if no saved messages exist
+            if (messages.length === 0) {
+                const defaultMessages = [
+                    {
+                        author: "Grandma",
+                        date: "Today",
+                        content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy. We love you more than words can say!"
+                    },
+                    {
+                        author: "Aunt Sarah",
+                        date: "Today",
+                        content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
+                    }
+                ];
+
+                defaultMessages.forEach(message => {
+                    addMessageToDOM(message);
+                });
+
+                // Save default messages
+                saveMessages(defaultMessages);
+            } else {
+                // Display saved messages
+                messages.forEach(message => {
+                    addMessageToDOM(message);
+                });
+            }
+        }
+
+        // Function to add a message to the DOM
+        function addMessageToDOM(message) {
+            const messagesContainer = document.getElementById('messages-container');
+
+            const messageCard = document.createElement('div');
+            messageCard.classList.add('message-card');
+
+            messageCard.innerHTML = `
+                <div class="message-header">
+                    <span class="message-author">${message.author}</span>
+                    <span class="message-date">${message.date}</span>
+                </div>
+                <div class="message-content">
+                    ${message.content}
+                </div>
+            `;
+
+            messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
+        }
+
+        // Function to show success message
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('success-message');
+            successMessage.classList.add('show');
+
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+
         // Guestbook form submission
         document.getElementById('guestbook-form').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -1110,34 +1192,41 @@
             const message = document.getElementById('message').value;
 
             if (name && message) {
-                // Create new message element
-                const messageCard = document.createElement('div');
-                messageCard.classList.add('message-card');
-
+                // Create new message object
                 const currentDate = new Date();
                 const formattedDate = currentDate.toLocaleDateString();
 
-                messageCard.innerHTML = `
-                    <div class="message-header">
-                        <span class="message-author">${name}</span>
-                        <span class="message-date">${formattedDate}</span>
-                    </div>
-                    <div class="message-content">
-                        ${message}
-                    </div>
-                `;
+                const newMessage = {
+                    author: name,
+                    date: formattedDate,
+                    content: message
+                };
 
-                // Add to messages container
-                const messagesContainer = document.getElementById('messages-container');
-                messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
+                // Get existing messages
+                const messages = getMessages();
+
+                // Add new message to the beginning of the array
+                messages.unshift(newMessage);
+
+                // Save updated messages to localStorage
+                saveMessages(messages);
+
+                // Add new message to DOM
+                addMessageToDOM(newMessage);
 
                 // Reset form
                 this.reset();
+
+                // Show success message
+                showSuccessMessage();
 
                 // Create confetti effect
                 createConfetti({ pageY: window.innerHeight / 2 });
             }
         });
+
+        // Load messages when the page loads
+        window.addEventListener('DOMContentLoaded', displayMessages);
 
         // Prevent right-click on images
         document.querySelectorAll('img').forEach(img => {
