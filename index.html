@@ -34,8 +34,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.2) 0%, transparent 20%),
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.2) 0%, transparent 20%),
                 radial-gradient(circle at 90% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 20%),
                 radial-gradient(circle at 30% 70%, rgba(255, 218, 224, 0.2) 0%, transparent 20%),
                 radial-gradient(circle at 80% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 20%);
@@ -227,6 +226,7 @@
 
         .timeline-content {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 40px;
         }
@@ -240,6 +240,7 @@
             position: relative;
             backdrop-filter: blur(10px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
         }
 
         .timeline-item:hover {
@@ -582,6 +583,60 @@
             transform: translateX(0);
         }
 
+        /* Random Photos Section */
+        .random-photos {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .random-photos h2 {
+            color: #ff69b4;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .random-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .random-photo-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .random-photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.3);
+        }
+
+        .random-photo-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .random-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        .random-photo-caption {
+            padding: 15px;
+            font-weight: 600;
+            color: #ff69b4;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
@@ -608,6 +663,10 @@
 
             .milestone-container {
                 grid-template-columns: 1fr;
+            }
+
+            .random-photos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
 
@@ -667,6 +726,24 @@
                             </div>
                             <p>First smile captured</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby1a/600/400.jpg" alt="Armani Month 1"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First bath at home</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby1a/600/400.jpg" alt="Ameerah Month 1"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First doctor visit</p>
+                        </div>
                     </div>
                 </div>
 
@@ -691,6 +768,24 @@
                                 <div class="media-overlay"></div>
                             </div>
                             <p>Sleeping peacefully</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby2a/600/400.jpg" alt="Armani Month 2"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time in the crib</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby2a/600/400.jpg" alt="Ameerah Month 2"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First family outing</p>
                         </div>
                     </div>
                 </div>
@@ -717,6 +812,24 @@
                             </div>
                             <p>First giggle session</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby3a/600/400.jpg" alt="Armani Month 3"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time holding head up</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby3a/600/400.jpg" alt="Ameerah Month 3"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First music class</p>
+                        </div>
                     </div>
                 </div>
 
@@ -741,6 +854,24 @@
                                 <div class="media-overlay"></div>
                             </div>
                             <p>Playtime with toys</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby4a/600/400.jpg" alt="Armani Month 4"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time rolling over</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby4a/600/400.jpg" alt="Ameerah Month 4"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First baby swing experience</p>
                         </div>
                     </div>
                 </div>
@@ -767,6 +898,24 @@
                             </div>
                             <p>First outdoor adventure</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby5a/600/400.jpg" alt="Armani Month 5"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time reaching for toys</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby5a/600/400.jpg" alt="Ameerah Month 5"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time at the beach</p>
+                        </div>
                     </div>
                 </div>
 
@@ -791,6 +940,24 @@
                                 <div class="media-overlay"></div>
                             </div>
                             <p>Sitting up on her own</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby6a/600/400.jpg" alt="Armani Month 6"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time in high chair</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby6a/600/400.jpg" alt="Ameerah Month 6"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First swim lesson</p>
                         </div>
                     </div>
                 </div>
@@ -817,6 +984,24 @@
                             </div>
                             <p>Playing peek-a-boo</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby7a/600/400.jpg" alt="Armani Month 7"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time on swing</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby7a/600/400.jpg" alt="Ameerah Month 7"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time clapping</p>
+                        </div>
                     </div>
                 </div>
 
@@ -841,6 +1026,24 @@
                                 <div class="media-overlay"></div>
                             </div>
                             <p>Learning to clap</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby8a/600/400.jpg" alt="Armani Month 8"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time crawling</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby8a/600/400.jpg" alt="Ameerah Month 8"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time feeding self</p>
                         </div>
                     </div>
                 </div>
@@ -867,6 +1070,24 @@
                             </div>
                             <p>First words: "Mama"</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby9a/600/400.jpg" alt="Armani Month 9"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time pulling up</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby9a/600/400.jpg" alt="Ameerah Month 9"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time with pets</p>
+                        </div>
                     </div>
                 </div>
 
@@ -891,6 +1112,24 @@
                                 <div class="media-overlay"></div>
                             </div>
                             <p>Pulling up to stand</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby10a/600/400.jpg" alt="Armani Month 10"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time cruising</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby10a/600/400.jpg" alt="Ameerah Month 10"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time at zoo</p>
                         </div>
                     </div>
                 </div>
@@ -917,6 +1156,24 @@
                             </div>
                             <p>First haircut</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby11a/600/400.jpg" alt="Armani Month 11"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time standing alone</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby11a/600/400.jpg" alt="Ameerah Month 11"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First time with grandparents</p>
+                        </div>
                     </div>
                 </div>
 
@@ -942,6 +1199,101 @@
                             </div>
                             <p>Taking first steps</p>
                         </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby12a/600/400.jpg" alt="Armani Month 12"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First birthday cake</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby12a/600/400.jpg" alt="Ameerah Month 12"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First birthday party</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Random Photos Section -->
+            <div class="random-photos">
+                <h2>Special Moments</h2>
+                <div class="random-photos-grid">
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins1/600/400.jpg" alt="Special Moment 1"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First family vacation</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins2/600/400.jpg" alt="Special Moment 2"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Holiday celebration</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins3/600/400.jpg" alt="Special Moment 3"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Playtime together</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins4/600/400.jpg" alt="Special Moment 4"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First time at the pool</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins5/600/400.jpg" alt="Special Moment 5"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First Halloween</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins6/600/400.jpg" alt="Special Moment 6"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Meeting cousins</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins7/600/400.jpg" alt="Special Moment 7"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First Christmas</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins8/600/400.jpg" alt="Special Moment 8"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First Easter</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins9/600/400.jpg" alt="Special Moment 9"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First trip to the farm</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="https://picsum.photos/seed/twins10/600/400.jpg" alt="Special Moment 10"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First family portrait</div>
                     </div>
                 </div>
             </div>
@@ -961,7 +1313,6 @@
                             the same time during a morning cuddle session.</div>
                     </div>
                 </div>
-
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-sync-alt"></i> Rolling Over</div>
                     <img src="https://picsum.photos/seed/babyrolling/600/400.jpg" alt="Rolling Over"
@@ -972,7 +1323,6 @@
                             two days later. Now they can't stop!</div>
                     </div>
                 </div>
-
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-utensils"></i> First Solid Food</div>
                     <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
@@ -983,7 +1333,6 @@
                             Armani was a bit more hesitant.</div>
                     </div>
                 </div>
-
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-comments"></i> First Words</div>
                     <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
@@ -994,7 +1343,6 @@
                             "Dada". The competition continues!</div>
                     </div>
                 </div>
-
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-baby"></i> Crawling</div>
                     <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling" class="milestone-image">
@@ -1004,7 +1352,6 @@
                             the traditional crawl. Now they're everywhere!</div>
                     </div>
                 </div>
-
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-walking"></i> First Steps</div>
                     <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
@@ -1022,7 +1369,6 @@
         <section id="guestbook" class="content-section">
             <div class="guestbook-container">
                 <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Birthday Messages</h2>
-
                 <form class="guestbook-form" id="guestbook-form">
                     <div class="form-group">
                         <label for="name">Your Name</label>
@@ -1035,7 +1381,6 @@
                     </div>
                     <button type="submit" class="btn-submit">Post Message</button>
                 </form>
-
                 <div class="messages-container" id="messages-container">
                     <!-- Messages will be loaded here from localStorage -->
                 </div>
@@ -1060,29 +1405,28 @@
     </div>
 
     <script>
-        // Navigation tabs functionality
+        // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Remove active class from all tabs and sections
+                // Remove active class from all tabs and sections 
                 document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
 
-                // Add active class to clicked tab and corresponding section
+                // Add active class to clicked tab and corresponding section 
                 tab.classList.add('active');
                 const sectionId = tab.getAttribute('data-section');
                 document.getElementById(sectionId).classList.add('active');
             });
         });
 
-        // Confetti animation
+        // Confetti animation 
         function createConfetti(event) {
             const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
-
             for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
 
-                // Random properties
+                // Random properties 
                 const size = Math.random() * 10 + 5;
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 const left = Math.random() * 100;
@@ -1099,33 +1443,33 @@
 
                 document.body.appendChild(confetti);
 
-                // Remove confetti after animation completes
+                // Remove confetti after animation completes 
                 setTimeout(() => {
                     confetti.remove();
                 }, animationDuration * 1000);
             }
         }
 
-        // Function to save messages to localStorage
+        // Function to save messages to localStorage 
         function saveMessages(messages) {
             localStorage.setItem('birthdayMessages', JSON.stringify(messages));
         }
 
-        // Function to get messages from localStorage
+        // Function to get messages from localStorage 
         function getMessages() {
             const messages = localStorage.getItem('birthdayMessages');
             return messages ? JSON.parse(messages) : [];
         }
 
-        // Function to display messages
+        // Function to display messages 
         function displayMessages() {
             const messagesContainer = document.getElementById('messages-container');
             const messages = getMessages();
 
-            // Clear the container
+            // Clear the container 
             messagesContainer.innerHTML = '';
 
-            // Add default messages if no saved messages exist
+            // Add default messages if no saved messages exist 
             if (messages.length === 0) {
                 const defaultMessages = [
                     {
@@ -1144,37 +1488,36 @@
                     addMessageToDOM(message);
                 });
 
-                // Save default messages
+                // Save default messages 
                 saveMessages(defaultMessages);
             } else {
-                // Display saved messages
+                // Display saved messages 
                 messages.forEach(message => {
                     addMessageToDOM(message);
                 });
             }
         }
 
-        // Function to add a message to the DOM
+        // Function to add a message to the DOM 
         function addMessageToDOM(message) {
             const messagesContainer = document.getElementById('messages-container');
-
             const messageCard = document.createElement('div');
             messageCard.classList.add('message-card');
 
-            messageCard.innerHTML = `
-                <div class="message-header">
-                    <span class="message-author">${message.author}</span>
-                    <span class="message-date">${message.date}</span>
-                </div>
-                <div class="message-content">
-                    ${message.content}
-                </div>
+            messageCard.innerHTML = ` 
+                <div class="message-header"> 
+                    <span class="message-author">${message.author}</span> 
+                    <span class="message-date">${message.date}</span> 
+                </div> 
+                <div class="message-content"> 
+                    ${message.content} 
+                </div> 
             `;
 
             messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
         }
 
-        // Function to show success message
+        // Function to show success message 
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
             successMessage.classList.add('show');
@@ -1184,7 +1527,7 @@
             }, 3000);
         }
 
-        // Guestbook form submission
+        // Guestbook form submission 
         document.getElementById('guestbook-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -1192,7 +1535,7 @@
             const message = document.getElementById('message').value;
 
             if (name && message) {
-                // Create new message object
+                // Create new message object 
                 const currentDate = new Date();
                 const formattedDate = currentDate.toLocaleDateString();
 
@@ -1202,38 +1545,38 @@
                     content: message
                 };
 
-                // Get existing messages
+                // Get existing messages 
                 const messages = getMessages();
 
-                // Add new message to the beginning of the array
+                // Add new message to the beginning of the array 
                 messages.unshift(newMessage);
 
-                // Save updated messages to localStorage
+                // Save updated messages to localStorage 
                 saveMessages(messages);
 
-                // Add new message to DOM
+                // Add new message to DOM 
                 addMessageToDOM(newMessage);
 
-                // Reset form
+                // Reset form 
                 this.reset();
 
-                // Show success message
+                // Show success message 
                 showSuccessMessage();
 
-                // Create confetti effect
+                // Create confetti effect 
                 createConfetti({ pageY: window.innerHeight / 2 });
             }
         });
 
-        // Load messages when the page loads
+        // Load messages when the page loads 
         window.addEventListener('DOMContentLoaded', displayMessages);
 
-        // Prevent right-click on images
+        // Prevent right-click on images 
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', e => e.preventDefault());
         });
 
-        // Disable print screen
+        // Disable print screen 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'PrintScreen') {
                 navigator.clipboard.writeText('');
@@ -1241,26 +1584,25 @@
             }
         });
 
-        // Add watermark overlay to images
-        document.querySelectorAll('.protected-image, .milestone-image').forEach(img => {
+        // Add watermark overlay to images 
+        document.querySelectorAll('.protected-image, .milestone-image, .random-photo').forEach(img => {
             img.addEventListener('load', function () {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 canvas.width = this.naturalWidth;
                 canvas.height = this.naturalHeight;
-
                 ctx.drawImage(this, 0, 0);
 
-                // Add watermark
+                // Add watermark 
                 ctx.font = '20px Quicksand';
                 ctx.fillStyle = 'rgba(255, 105, 180, 0.5)';
                 ctx.textAlign = 'center';
                 ctx.fillText('© Armani & Ameerah', canvas.width / 2, canvas.height - 20);
 
-                // Replace image with watermarked version
+                // Replace image with watermarked version 
                 this.src = canvas.toDataURL('image/jpeg');
             });
-        });
+        }); 
     </script>
 </body>
 
