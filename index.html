@@ -188,7 +188,7 @@
             }
         }
 
-        /* Timeline Gallery Styles */
+        /* Timeline Gallery Styles - Updated for 3 cards */
         .timeline {
             position: relative;
             margin: 40px 0;
@@ -233,7 +233,7 @@
         }
 
         .timeline-item {
-            width: 45%;
+            width: 30%;
             padding: 20px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
@@ -249,12 +249,20 @@
             box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
         }
 
-        .timeline-item:nth-child(odd) {
+        /* Positioning for 3 cards */
+        .timeline-item:nth-child(1) {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(2) {
+            margin-left: auto;
             margin-right: auto;
         }
 
-        .timeline-item:nth-child(even) {
+        .timeline-item:nth-child(3) {
             margin-left: auto;
+            margin-right: 0;
         }
 
         .timeline-item::before {
@@ -269,11 +277,17 @@
             box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3);
         }
 
-        .timeline-item:nth-child(odd)::before {
+        /* Positioning for timeline dots */
+        .timeline-item:nth-child(1)::before {
             right: -60px;
         }
 
-        .timeline-item:nth-child(even)::before {
+        .timeline-item:nth-child(2)::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item:nth-child(3)::before {
             left: -60px;
         }
 
@@ -714,7 +728,7 @@
                                 <img src="./assets/month1.jpg" alt="Armani Month 1" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Our first family photo</p>
+                            <p>1 month of sweetness</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -723,25 +737,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First smile captured</p>
+                            <p>1 month of joy</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby1a/600/400.jpg" alt="Armani Month 1"
-                                    class="protected-image">
+                                <img src="./assets/1month.jpg" alt="Both Twins Month 1" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First bath at home</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby1a/600/400.jpg" alt="Ameerah Month 1"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First doctor visit</p>
+                            <p>Our first month together</p>
                         </div>
                     </div>
                 </div>
@@ -756,7 +760,7 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First bath time together</p>
+                            <p>2 months of growing</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -765,25 +769,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Sleeping peacefully</p>
+                            <p>2 months of smiles</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby2a/600/400.jpg" alt="Armani Month 2"
-                                    class="protected-image">
+                                <img src="./assets/2months.jpg" alt="Both Twins Month 2" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time in the crib</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby2a/600/400.jpg" alt="Ameerah Month 2"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First family outing</p>
+                            <p>Double the fun at 2 months</p>
                         </div>
                     </div>
                 </div>
@@ -798,7 +792,7 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Tummy time adventures</p>
+                            <p>3 months of curiosity</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -807,25 +801,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First giggle session</p>
+                            <p>3 months of giggles</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby3a/600/400.jpg" alt="Armani Month 3"
-                                    class="protected-image">
+                                <img src="./assets/3months.jpg" alt="Both Twins Month 3" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time holding head up</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby3a/600/400.jpg" alt="Ameerah Month 3"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First music class</p>
+                            <p>Three months of twin adventures</p>
                         </div>
                     </div>
                 </div>
@@ -836,38 +820,27 @@
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby4/600/400.jpg" alt="Armani Month 4"
-                                    class="protected-image">
+                                <img src="./assets/4monthAr.jpg" alt="Armani Month 4" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Discovering hands</p>
+                            <p>Four Months of Fun!</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby4/600/400.jpg" alt="Ameerah Month 4"
-                                    class="protected-image">
+                                <img src="./assets/4monthAm.jpg" alt="Ameerah Month 4" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Playtime with toys</p>
+                            <p>Four Months of wonder!</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby4a/600/400.jpg" alt="Armani Month 4"
-                                    class="protected-image">
+                                <img src="https://picsum.photos/seed/twinstogether4/600/400.jpg"
+                                    alt="Both Twins Month 4" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time rolling over</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby4a/600/400.jpg" alt="Ameerah Month 4"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First baby swing experience</p>
+                            <p>four months of double fun!</p>
                         </div>
                     </div>
                 </div>
@@ -878,38 +851,27 @@
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby5/600/400.jpg" alt="Armani Month 5"
-                                    class="protected-image">
+                                <img src="./assets/5monthAr.jpg" alt="Armani Month 5" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time in the stroller</p>
+                            <p>5 months look good on me</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby5/600/400.jpg" alt="Ameerah Month 5"
-                                    class="protected-image">
+                                <img src="./assets/5monthAm.jpg" alt="Ameerah Month 5" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First outdoor adventure</p>
+                            <p>5 months look good on me</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby5a/600/400.jpg" alt="Armani Month 5"
-                                    class="protected-image">
+                                <img src="https://picsum.photos/seed/twinstogether5/600/400.jpg"
+                                    alt="Both Twins Month 5" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time reaching for toys</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby5a/600/400.jpg" alt="Ameerah Month 5"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First time at the beach</p>
+                            <p>5 months look good on us</p>
                         </div>
                     </div>
                 </div>
@@ -920,11 +882,10 @@
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby6/600/400.jpg" alt="Armani Month 6"
-                                    class="protected-image">
+                                <img src="./assets/6monthsAr.jpg" alt="Armani Month 6" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First solid food</p>
+                            <p>6 months of milestones</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -933,25 +894,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Sitting up on her own</p>
+                            <p>6 months of discoveries</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby6a/600/400.jpg" alt="Armani Month 6"
-                                    class="protected-image">
+                                <img src="./assets/6months.jpg" alt="Both Twins Month 6" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time in high chair</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby6a/600/400.jpg" alt="Ameerah Month 6"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First swim lesson</p>
+                            <p>We are half a year old!</p>
                         </div>
                     </div>
                 </div>
@@ -962,38 +913,26 @@
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby7/600/400.jpg" alt="Armani Month 7"
-                                    class="protected-image">
+                                <img src="./assets/7monthsAr.jpg" alt="Armani Month 7" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First trip to the park</p>
+                            <p>7 months of exploration</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby7/600/400.jpg" alt="Ameerah Month 7"
-                                    class="protected-image">
+                                <img src="./assets/7monthAm.jpg" alt="Ameerah Month 7" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Playing peek-a-boo</p>
+                            <p>7 months of playfulness"</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby7a/600/400.jpg" alt="Armani Month 7"
-                                    class="protected-image">
+                                <img src="./assets/7months.jpg" alt="Both Twins Month 7" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time on swing</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby7a/600/400.jpg" alt="Ameerah Month 7"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First time clapping</p>
+                            <p>Seven months of twin magic</p>
                         </div>
                     </div>
                 </div>
@@ -1008,7 +947,7 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First tooth appears</p>
+                            <p>8 months of movement</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -1017,25 +956,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Learning to clap</p>
+                            <p>8 months of personality</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby8a/600/400.jpg" alt="Armani Month 8"
-                                    class="protected-image">
+                                <img src="./assets/8months.jpg" alt="Both Twins Month 8" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time crawling</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby8a/600/400.jpg" alt="Ameerah Month 8"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First time feeding self</p>
+                            <p>Eight months of growing together</p>
                         </div>
                     </div>
                 </div>
@@ -1050,7 +979,7 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Crawling everywhere</p>
+                            <p>9 months of communication</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -1059,25 +988,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First words: "Mama"</p>
+                            <p>9 months of communication</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby9a/600/400.jpg" alt="Armani Month 9"
-                                    class="protected-image">
+                                <img src="./assets/9months.jpg" alt="Both Twins Month 9" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time pulling up</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby9a/600/400.jpg" alt="Ameerah Month 9"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First time with pets</p>
+                            <p>Nine months of twin connection</p>
                         </div>
                     </div>
                 </div>
@@ -1092,7 +1011,7 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First words: "Dada"</p>
+                            <p>10 months of adventure</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -1101,25 +1020,15 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Pulling up to stand</p>
+                            <p>10 months of learning</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby10a/600/400.jpg" alt="Armani Month 10"
-                                    class="protected-image">
+                                <img src="./assets/10months.jpg" alt="Both Twins Month 10" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time cruising</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby10a/600/400.jpg" alt="Ameerah Month 10"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First time at zoo</p>
+                            <p>Ten months of double the joy</p>
                         </div>
                     </div>
                 </div>
@@ -1134,7 +1043,7 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Cruising along furniture</p>
+                            <p>11 months of progress</p>
                         </div>
                         <div class="timeline-item">
                             <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
@@ -1143,25 +1052,16 @@
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First haircut</p>
+                            <p>11 months of growth</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby11a/600/400.jpg" alt="Armani Month 11"
-                                    class="protected-image">
+                                <img src="https://picsum.photos/seed/twinstogether11/600/400.jpg"
+                                    alt="Both Twins Month 11" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First time standing alone</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby11a/600/400.jpg" alt="Ameerah Month 11"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First time with grandparents</p>
+                            <p>Eleven months of twin love</p>
                         </div>
                     </div>
                 </div>
@@ -1188,19 +1088,10 @@
                             <p>Taking first steps</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby12a/600/400.jpg" alt="Armani Month 12"
-                                    class="protected-image">
-                                <div class="media-overlay"></div>
-                            </div>
-                            <p>First birthday cake</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
-                            <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby12a/600/400.jpg" alt="Ameerah Month 12"
-                                    class="protected-image">
+                                <img src="https://picsum.photos/seed/twinstogether12/600/400.jpg"
+                                    alt="Both Twins Month 12" class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
                             <p>First birthday party</p>
@@ -1220,37 +1111,34 @@
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="./assets/Random.jpg" alt="Special Moment 2" class="random-photo">
+                            <img src="./assets/doublecuteness.jpg" alt="Special Moment 2" class="random-photo">
                         </div>
                         <div class="random-photo-caption">Double the Cuteness</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="https://picsum.photos/seed/twins3/600/400.jpg" alt="Special Moment 3"
-                                class="random-photo">
+                            <img src="./assets/amdadb.jpg" alt="Special Moment 3" class="random-photo">
                         </div>
-                        <div class="random-photo-caption">Playtime together</div>
+                        <div class="random-photo-caption">Ameerah on Dad's Birthday</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="https://picsum.photos/seed/twins4/600/400.jpg" alt="Special Moment 4"
-                                class="random-photo">
+                            <img src="./assets/ardadab.jpg" alt="Special Moment 4" class="random-photo">
                         </div>
-                        <div class="random-photo-caption">First time at the pool</div>
+                        <div class="random-photo-caption">Armani on Dad's Birthday</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="https://picsum.photos/seed/twins5/600/400.jpg" alt="Special Moment 5"
-                                class="random-photo">
+                            <img src="./assets/dadaB.jpg" alt="Special Moment 5" class="random-photo">
                         </div>
-                        <div class="random-photo-caption">First Halloween</div>
+                        <div class="random-photo-caption">Still on Dad's Cake Day</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
                             <img src="https://picsum.photos/seed/twins6/600/400.jpg" alt="Special Moment 6"
                                 class="random-photo">
                         </div>
-                        <div class="random-photo-caption">Meeting cousins</div>
+                        <div class="random-photo-caption">First Eid!</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
@@ -1421,19 +1309,16 @@
                 }, animationDuration * 1000);
             }
         }
-
         // Function to save messages to localStorage
         function saveMessagesToLocalStorage(messages) {
             localStorage.setItem('birthdayMessages', JSON.stringify(messages));
             return Promise.resolve(true);
         }
-
         // Function to load messages from localStorage
         function loadMessagesFromLocalStorage() {
             const messages = localStorage.getItem('birthdayMessages');
             return Promise.resolve(messages ? JSON.parse(messages) : null);
         }
-
         // Update the existing functions to use localStorage
         async function saveMessagesToJSON(messages) {
             try {
@@ -1444,7 +1329,6 @@
                 return false;
             }
         }
-
         async function loadMessagesFromJSON() {
             try {
                 const messages = await loadMessagesFromLocalStorage();
@@ -1454,16 +1338,13 @@
                 return null;
             }
         }
-
         // Function to display messages
         async function displayMessages() {
             const messagesContainer = document.getElementById('messages-container');
             messagesContainer.innerHTML = ''; // Clear container
-
             try {
                 // Load messages from localStorage
                 const messages = await loadMessagesFromJSON();
-
                 if (messages && messages.length > 0) {
                     // Display saved messages
                     messages.forEach(message => {
@@ -1483,18 +1364,15 @@
                             content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
                         }
                     ];
-
                     // Display default messages
                     defaultMessages.forEach(message => {
                         addMessageToDOM(message);
                     });
-
                     // Save default messages to localStorage
                     await saveMessagesToLocalStorage(defaultMessages);
                 }
             } catch (error) {
                 console.error('Error displaying messages:', error);
-
                 // Fallback to default messages if there's an error
                 const defaultMessages = [
                     {
@@ -1508,14 +1386,12 @@
                         content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
                     }
                 ];
-
                 // Display default messages
                 defaultMessages.forEach(message => {
                     addMessageToDOM(message);
                 });
             }
         }
-
         // Function to add a message to the DOM
         function addMessageToDOM(message) {
             const messagesContainer = document.getElementById('messages-container');
@@ -1532,7 +1408,6 @@
             `;
             messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
         }
-
         // Function to show success message
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
@@ -1541,13 +1416,11 @@
                 successMessage.classList.remove('show');
             }, 3000);
         }
-
         // Guestbook form submission
         document.getElementById('guestbook-form').addEventListener('submit', async function (e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
             const message = document.getElementById('message').value;
-
             if (name && message) {
                 // Create new message object
                 const currentDate = new Date();
@@ -1557,27 +1430,20 @@
                     date: formattedDate,
                     content: message
                 };
-
                 try {
                     // Load existing messages
                     const existingMessages = await loadMessagesFromJSON() || [];
-
                     // Add new message to the beginning of the array
                     existingMessages.unshift(newMessage);
-
                     // Save updated messages to localStorage
                     const saveResult = await saveMessagesToJSON(existingMessages);
-
                     if (saveResult) {
                         // Add new message to DOM
                         addMessageToDOM(newMessage);
-
                         // Reset form
                         this.reset();
-
                         // Show success message
                         showSuccessMessage();
-
                         // Create confetti effect
                         createConfetti({ pageY: window.innerHeight / 2 });
                     } else {
@@ -1589,15 +1455,12 @@
                 }
             }
         });
-
         // Load messages when the page loads
         window.addEventListener('DOMContentLoaded', displayMessages);
-
         // Prevent right-click on images 
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', e => e.preventDefault());
         });
-
         // Disable print screen 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'PrintScreen') {
@@ -1605,7 +1468,6 @@
                 alert('Screenshots are disabled on this page.');
             }
         });
-
         // Add watermark overlay to images 
         document.querySelectorAll('.protected-image, .milestone-image, .random-photo').forEach(img => {
             img.addEventListener('load', function () {
