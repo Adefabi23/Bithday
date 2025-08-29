@@ -1316,12 +1316,30 @@
             try {
                 const response = await fetch('/.netlify/functions/messages', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     body: JSON.stringify(messages[0]) // Send just the new message
                 });
-                return await response.json();
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                return result;
             } catch (error) {
                 console.error('Error saving message:', error);
+
+                // Show user-friendly error message
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    alert('Network error: Please check your internet connection and try again.');
+                } else {
+                    alert(`Error: ${error.message || 'Failed to save message'}`);
+                }
+
                 return false;
             }
         }
@@ -1329,11 +1347,25 @@
         // Function to load messages using Netlify functions
         async function loadMessagesFromJSON() {
             try {
-                const response = await fetch('/.netlify/functions/messages');
-                return await response.json();
+                const response = await fetch('/.netlify/functions/messages', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const messages = await response.json();
+                return Array.isArray(messages) ? messages : [];
             } catch (error) {
                 console.error('Error loading messages:', error);
-                return null;
+
+                // Return empty array on error to prevent breaking the UI
+                return [];
             }
         }
 
@@ -1374,24 +1406,16 @@
             } catch (error) {
                 console.error('Error displaying messages:', error);
 
-                // Fallback to default messages if there's an error
-                const defaultMessages = [
-                    {
-                        author: "Grandma",
-                        date: "Today",
-                        content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy. We love you more than words can say!"
-                    },
-                    {
-                        author: "Aunt Sarah",
-                        date: "Today",
-                        content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
-                    }
-                ];
-
-                // Display default messages
-                defaultMessages.forEach(message => {
-                    addMessageToDOM(message);
-                });
+                // Show error message to user
+                messagesContainer.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #ff69b4;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                    <p>Unable to load messages. Please check your internet connection and try again.</p>
+                    <button onclick="location.reload()" style="margin-top: 15px; padding: 10px 20px; background: #ff69b4; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                        <i class="fas fa-sync-alt"></i> Reload Page
+                    </button>
+                </div>
+            `;
             }
         }
 
@@ -1400,13 +1424,22 @@
             const messagesContainer = document.getElementById('messages-container');
             const messageCard = document.createElement('div');
             messageCard.classList.add('message-card');
+
+            // Sanitize content to prevent XSS
+            const sanitizedContent = message.content
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+
             messageCard.innerHTML = ` 
             <div class="message-header"> 
-                <span class="message-author">${message.author}</span> 
-                <span class="message-date">${message.date}</span> 
+                <span class="message-author">${message.author || 'Anonymous'}</span> 
+                <span class="message-date">${message.date || 'Today'}</span> 
             </div> 
             <div class="message-content"> 
-                ${message.content} 
+                ${sanitizedContent} 
             </div> 
         `;
             messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
@@ -1421,56 +1454,112 @@
             }, 3000);
         }
 
+        // Function to show loading state
+        function showLoadingState(form, isLoading) {
+            const submitButton = form.querySelector('.btn-submit');
+            if (isLoading) {
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+                submitButton.style.opacity = '0.7';
+            } else {
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Post Message';
+                submitButton.style.opacity = '1';
+            }
+        }
+
         // Guestbook form submission
         document.getElementById('guestbook-form').addEventListener('submit', async function (e) {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const message = document.getElementById('message').value;
 
-            if (name && message) {
-                // Create new message object
-                const currentDate = new Date();
-                const formattedDate = currentDate.toLocaleDateString();
-                const newMessage = {
-                    author: name,
-                    date: formattedDate,
-                    content: message
-                };
+            const name = document.getElementById('name').value.trim();
+            const message = document.getElementById('message').value.trim();
 
-                try {
-                    // Load existing messages
-                    const existingMessages = await loadMessagesFromJSON() || [];
+            if (!name) {
+                alert('Please enter your name.');
+                document.getElementById('name').focus();
+                return;
+            }
 
-                    // Add new message to the beginning of the array
-                    existingMessages.unshift(newMessage);
+            if (!message) {
+                alert('Please enter a message.');
+                document.getElementById('message').focus();
+                return;
+            }
 
-                    // Save updated messages to Netlify functions
-                    const saveResult = await saveMessagesToJSON(existingMessages);
+            // Create new message object
+            const currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString();
+            const newMessage = {
+                author: name,
+                date: formattedDate,
+                content: message
+            };
 
-                    if (saveResult) {
-                        // Add new message to DOM
-                        addMessageToDOM(newMessage);
+            try {
+                // Show loading state
+                showLoadingState(this, true);
 
-                        // Reset form
-                        this.reset();
+                // Load existing messages
+                const existingMessages = await loadMessagesFromJSON();
 
-                        // Show success message
-                        showSuccessMessage();
+                // Add new message to the beginning of the array
+                existingMessages.unshift(newMessage);
 
-                        // Create confetti effect
-                        createConfetti({ pageY: window.innerHeight / 2 });
-                    } else {
-                        alert('There was an error saving your message. Please try again.');
-                    }
-                } catch (error) {
-                    console.error('Error submitting message:', error);
-                    alert('There was an error submitting your message. Please try again.');
+                // Save updated messages to Netlify functions
+                const saveResult = await saveMessagesToJSON(existingMessages);
+
+                if (saveResult && saveResult.success) {
+                    // Add new message to DOM
+                    addMessageToDOM(newMessage);
+
+                    // Reset form
+                    this.reset();
+
+                    // Show success message
+                    showSuccessMessage();
+
+                    // Create confetti effect
+                    createConfetti({ pageY: window.innerHeight / 2 });
+
+                    // Scroll to top of messages
+                    document.getElementById('messages-container').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else {
+                    alert('There was an error saving your message. Please try again.');
                 }
+            } catch (error) {
+                console.error('Error submitting message:', error);
+                // Error message is already shown in saveMessagesToJSON
+            } finally {
+                // Hide loading state
+                showLoadingState(this, false);
             }
         });
 
         // Load messages when the page loads
-        window.addEventListener('DOMContentLoaded', displayMessages);
+        document.addEventListener('DOMContentLoaded', function () {
+            displayMessages();
+
+            // Add retry button if loading failed
+            setTimeout(() => {
+                const messagesContainer = document.getElementById('messages-container');
+                if (messagesContainer.innerHTML.includes('Unable to load messages')) {
+                    // Add a retry button that appears after 5 seconds
+                    setTimeout(() => {
+                        const retryButton = document.createElement('button');
+                        retryButton.innerHTML = '<i class="fas fa-redo"></i> Retry Loading Messages';
+                        retryButton.className = 'btn-submit';
+                        retryButton.style.margin = '20px auto';
+                        retryButton.style.display = 'block';
+                        retryButton.onclick = displayMessages;
+                        messagesContainer.appendChild(retryButton);
+                    }, 5000);
+                }
+            }, 1000);
+        });
 
         // Prevent right-click on images 
         document.querySelectorAll('img').forEach(img => {
@@ -1501,7 +1590,20 @@
                 // Replace image with watermarked version 
                 this.src = canvas.toDataURL('image/jpeg');
             });
-        }); 
+        });
+
+        // Add mobile-specific optimizations
+        if ('ontouchstart' in window) {
+            // Add touch feedback for mobile devices
+            document.querySelectorAll('.btn-submit, .nav-tab, .milestone-card').forEach(element => {
+                element.addEventListener('touchstart', function () {
+                    this.style.transform = 'scale(0.95)';
+                });
+                element.addEventListener('touchend', function () {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        }
     </script>
 </body>
 
