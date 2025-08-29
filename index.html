@@ -1283,6 +1283,7 @@
                 document.getElementById(sectionId).classList.add('active');
             });
         });
+
         // Confetti animation 
         function createConfetti(event) {
             const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
@@ -1309,42 +1310,42 @@
                 }, animationDuration * 1000);
             }
         }
-        // Function to save messages to localStorage
-        function saveMessagesToLocalStorage(messages) {
-            localStorage.setItem('birthdayMessages', JSON.stringify(messages));
-            return Promise.resolve(true);
-        }
-        // Function to load messages from localStorage
-        function loadMessagesFromLocalStorage() {
-            const messages = localStorage.getItem('birthdayMessages');
-            return Promise.resolve(messages ? JSON.parse(messages) : null);
-        }
-        // Update the existing functions to use localStorage
+
+        // Function to save messages using Netlify functions
         async function saveMessagesToJSON(messages) {
             try {
-                await saveMessagesToLocalStorage(messages);
-                return true;
+                const response = await fetch('/.netlify/functions/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(messages[0]) // Send just the new message
+                });
+                return await response.json();
             } catch (error) {
-                console.error('Could not save messages to localStorage:', error);
+                console.error('Error saving message:', error);
                 return false;
             }
         }
+
+        // Function to load messages using Netlify functions
         async function loadMessagesFromJSON() {
             try {
-                const messages = await loadMessagesFromLocalStorage();
-                return messages;
+                const response = await fetch('/.netlify/functions/messages');
+                return await response.json();
             } catch (error) {
-                console.error('Could not load messages from localStorage:', error);
+                console.error('Error loading messages:', error);
                 return null;
             }
         }
+
         // Function to display messages
         async function displayMessages() {
             const messagesContainer = document.getElementById('messages-container');
             messagesContainer.innerHTML = ''; // Clear container
+
             try {
-                // Load messages from localStorage
+                // Load messages from Netlify functions
                 const messages = await loadMessagesFromJSON();
+
                 if (messages && messages.length > 0) {
                     // Display saved messages
                     messages.forEach(message => {
@@ -1364,15 +1365,15 @@
                             content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
                         }
                     ];
+
                     // Display default messages
                     defaultMessages.forEach(message => {
                         addMessageToDOM(message);
                     });
-                    // Save default messages to localStorage
-                    await saveMessagesToLocalStorage(defaultMessages);
                 }
             } catch (error) {
                 console.error('Error displaying messages:', error);
+
                 // Fallback to default messages if there's an error
                 const defaultMessages = [
                     {
@@ -1386,28 +1387,31 @@
                         content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
                     }
                 ];
+
                 // Display default messages
                 defaultMessages.forEach(message => {
                     addMessageToDOM(message);
                 });
             }
         }
+
         // Function to add a message to the DOM
         function addMessageToDOM(message) {
             const messagesContainer = document.getElementById('messages-container');
             const messageCard = document.createElement('div');
             messageCard.classList.add('message-card');
             messageCard.innerHTML = ` 
-                <div class="message-header"> 
-                    <span class="message-author">${message.author}</span> 
-                    <span class="message-date">${message.date}</span> 
-                </div> 
-                <div class="message-content"> 
-                    ${message.content} 
-                </div> 
-            `;
+            <div class="message-header"> 
+                <span class="message-author">${message.author}</span> 
+                <span class="message-date">${message.date}</span> 
+            </div> 
+            <div class="message-content"> 
+                ${message.content} 
+            </div> 
+        `;
             messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
         }
+
         // Function to show success message
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
@@ -1416,11 +1420,13 @@
                 successMessage.classList.remove('show');
             }, 3000);
         }
+
         // Guestbook form submission
         document.getElementById('guestbook-form').addEventListener('submit', async function (e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
             const message = document.getElementById('message').value;
+
             if (name && message) {
                 // Create new message object
                 const currentDate = new Date();
@@ -1430,20 +1436,27 @@
                     date: formattedDate,
                     content: message
                 };
+
                 try {
                     // Load existing messages
                     const existingMessages = await loadMessagesFromJSON() || [];
+
                     // Add new message to the beginning of the array
                     existingMessages.unshift(newMessage);
-                    // Save updated messages to localStorage
+
+                    // Save updated messages to Netlify functions
                     const saveResult = await saveMessagesToJSON(existingMessages);
+
                     if (saveResult) {
                         // Add new message to DOM
                         addMessageToDOM(newMessage);
+
                         // Reset form
                         this.reset();
+
                         // Show success message
                         showSuccessMessage();
+
                         // Create confetti effect
                         createConfetti({ pageY: window.innerHeight / 2 });
                     } else {
@@ -1455,12 +1468,15 @@
                 }
             }
         });
+
         // Load messages when the page loads
         window.addEventListener('DOMContentLoaded', displayMessages);
+
         // Prevent right-click on images 
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', e => e.preventDefault());
         });
+
         // Disable print screen 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'PrintScreen') {
@@ -1468,6 +1484,7 @@
                 alert('Screenshots are disabled on this page.');
             }
         });
+
         // Add watermark overlay to images 
         document.querySelectorAll('.protected-image, .milestone-image, .random-photo').forEach(img => {
             img.addEventListener('load', function () {
