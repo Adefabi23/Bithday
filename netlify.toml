@@ -1,15 +1,15 @@
-[build]
+﻿[build]
   publish = "."
 
 [functions]
   directory = "netlify/functions"
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/api/messages"
+  to = "/.netlify/functions/get-messages"
   status = 200
 
 [[redirects]]
-  from = "/test"
-  to = "/.netlify/functions/debug"
+  from = "/api/submit-message"
+  to = "/.netlify/functions/submit-message"
   status = 200

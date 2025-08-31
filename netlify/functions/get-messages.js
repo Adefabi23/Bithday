@@ -1,24 +1,25 @@
 exports.handler = async (event, context) => {
-  // Only GET requests
-  if (event.httpMethod !== 'GET') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
   try {
-    // In a real implementation, you would fetch from Netlify's API
-    // For this example, we'll return mock data
-    const messages = [
-      {
-        author: "Grandma",
-        date: "Today",
-        content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy! We love you more than words can say!"
-      },
-      {
-        author: "Aunt Sarah",
-        date: "Today",
-        content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
+    // Get the form submissions from Netlify
+    const response = await fetch(`https://api.netlify.com/api/v1/sites/${process.env.SITE_ID}/forms/birthday-messages/submissions`, {
+      headers: {
+        'Authorization': `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
+        'Content-Type': 'application/json'
       }
-    ];
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch messages: ${response.status}`);
+    }
+
+    const submissions = await response.json();
+    
+    // Transform the submissions to match your expected format
+    const messages = submissions.map(submission => ({
+      author: submission.data.name,
+      date: new Date(submission.created_at).toLocaleDateString(),
+      content: submission.data.message
+    }));
 
     return {
       statusCode: 200,
@@ -29,6 +30,14 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(messages)
     };
   } catch (error) {
-    return { statusCode: 500, body: error.toString() };
+    console.error('Error:', error);
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ error: error.message })
+    };
   }
 };
