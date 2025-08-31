@@ -1271,7 +1271,6 @@
     <div class="success-message" id="success-message">
         <i class="fas fa-check-circle"></i> Your message has been saved successfully!
     </div>
-
     <script>
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1313,18 +1312,15 @@
             }
         }
 
-        // Function to load messages from Netlify
-        async function loadMessagesFromNetlify() {
-            try {
-                const response = await fetch('/.netlify/functions/get-messages');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return await response.json();
-            } catch (error) {
-                console.error('Error loading messages:', error);
-                // Return default messages if there's an error
-                return [
+        // Function to load messages from localStorage
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+            const messagesContainer = document.getElementById('messages-container');
+            messagesContainer.innerHTML = '';
+
+            if (messages.length === 0) {
+                // Add default messages if none exist
+                const defaultMessages = [
                     {
                         author: "Grandma",
                         date: "Today",
@@ -1336,56 +1332,19 @@
                         content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
                     }
                 ];
-            }
-        }
 
-        // Function to display messages
-        async function displayMessages() {
-            const messagesContainer = document.getElementById('messages-container');
-            messagesContainer.innerHTML = ''; // Clear container
+                // Save default messages to localStorage
+                localStorage.setItem('birthdayMessages', JSON.stringify(defaultMessages));
 
-            try {
-                // Load messages from Netlify
-                const messages = await loadMessagesFromNetlify();
-
-                if (messages && messages.length > 0) {
-                    // Display saved messages
-                    messages.forEach(message => {
-                        addMessageToDOM(message);
-                    });
-                } else {
-                    // If no saved messages, use default messages
-                    const defaultMessages = [
-                        {
-                            author: "Grandma",
-                            date: "Today",
-                            content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy. We love you more than words can say!"
-                        },
-                        {
-                            author: "Aunt Sarah",
-                            date: "Today",
-                            content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
-                        }
-                    ];
-
-                    // Display default messages
-                    defaultMessages.forEach(message => {
-                        addMessageToDOM(message);
-                    });
-                }
-            } catch (error) {
-                console.error('Error displaying messages:', error);
-
-                // Show error message to user
-                messagesContainer.innerHTML = `
-                <div style="text-align: center; padding: 20px; color: #ff69b4;">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
-                    <p>Unable to load messages. Please check your internet connection and try again.</p>
-                    <button onclick="location.reload()" style="margin-top: 15px; padding: 10px 20px; background: #ff69b4; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600;">
-                        <i class="fas fa-sync-alt"></i> Reload Page
-                    </button>
-                </div>
-            `;
+                // Display default messages
+                defaultMessages.forEach(message => {
+                    addMessageToDOM(message);
+                });
+            } else {
+                // Display saved messages
+                messages.forEach(message => {
+                    addMessageToDOM(message);
+                });
             }
         }
 
@@ -1438,39 +1397,35 @@
             }
         }
 
-        // Handle form submission with Netlify
-        document.getElementById('guestbook-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load messages from localStorage
+            loadMessages();
 
-            const name = document.getElementById('name').value.trim();
-            const message = document.getElementById('message').value.trim();
+            // Handle form submission
+            document.getElementById('guestbook-form').addEventListener('submit', function (e) {
+                e.preventDefault();
 
-            if (!name) {
-                alert('Please enter your name.');
-                document.getElementById('name').focus();
-                return;
-            }
+                const name = document.getElementById('name').value.trim();
+                const message = document.getElementById('message').value.trim();
 
-            if (!message) {
-                alert('Please enter a message.');
-                document.getElementById('message').focus();
-                return;
-            }
+                if (!name) {
+                    alert('Please enter your name.');
+                    document.getElementById('name').focus();
+                    return;
+                }
 
-            try {
-                // Show loading state
-                showLoadingState(this, true);
+                if (!message) {
+                    alert('Please enter a message.');
+                    document.getElementById('message').focus();
+                    return;
+                }
 
-                // Submit form using Netlify
-                const formData = new FormData(this);
-                const response = await fetch('/', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: new URLSearchParams(formData).toString()
-                });
+                try {
+                    // Show loading state
+                    showLoadingState(this, true);
 
-                if (response.ok) {
-                    // Create new message object to display immediately
+                    // Create new message object
                     const currentDate = new Date();
                     const formattedDate = currentDate.toLocaleDateString();
                     const newMessage = {
@@ -1478,6 +1433,15 @@
                         date: formattedDate,
                         content: message
                     };
+
+                    // Get existing messages from localStorage
+                    let messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+
+                    // Add new message to the beginning
+                    messages.unshift(newMessage);
+
+                    // Save updated messages to localStorage
+                    localStorage.setItem('birthdayMessages', JSON.stringify(messages));
 
                     // Add new message to DOM
                     addMessageToDOM(newMessage);
@@ -1496,38 +1460,50 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                } else {
-                    throw new Error('Failed to submit form');
+
+                    // Optional: Log to console for debugging
+                    console.log('Message saved successfully:', newMessage);
+                    console.log('Total messages saved:', messages.length);
+
+                } catch (error) {
+                    console.error('Error saving message:', error);
+                    alert('There was an error saving your message. Please try again.');
+                } finally {
+                    // Hide loading state
+                    showLoadingState(this, false);
                 }
-            } catch (error) {
-                console.error('Error submitting message:', error);
-                alert('There was an error saving your message. Please try again.');
-            } finally {
-                // Hide loading state
-                showLoadingState(this, false);
-            }
-        });
+            });
 
-        // Load messages when the page loads
-        document.addEventListener('DOMContentLoaded', function () {
-            displayMessages();
-
-            // Add retry button if loading failed
-            setTimeout(() => {
+            // Add a clear all messages button for admin (optional)
+            const addClearButton = () => {
                 const messagesContainer = document.getElementById('messages-container');
-                if (messagesContainer.innerHTML.includes('Unable to load messages')) {
-                    // Add a retry button that appears after 5 seconds
-                    setTimeout(() => {
-                        const retryButton = document.createElement('button');
-                        retryButton.innerHTML = '<i class="fas fa-redo"></i> Retry Loading Messages';
-                        retryButton.className = 'btn-submit';
-                        retryButton.style.margin = '20px auto';
-                        retryButton.style.display = 'block';
-                        retryButton.onclick = displayMessages;
-                        messagesContainer.appendChild(retryButton);
-                    }, 5000);
-                }
-            }, 1000);
+                const clearButton = document.createElement('button');
+                clearButton.innerHTML = '<i class="fas fa-trash"></i> Clear All Messages (Admin Only)';
+                clearButton.className = 'btn-submit';
+                clearButton.style.marginTop = '20px';
+                clearButton.style.backgroundColor = '#ff6b6b';
+                clearButton.style.display = 'block';
+                clearButton.style.marginLeft = 'auto';
+                clearButton.style.marginRight = 'auto';
+
+                clearButton.addEventListener('click', function () {
+                    if (confirm('Are you sure you want to clear all messages? This action cannot be undone.')) {
+                        const password = prompt('Please enter admin password:');
+                        if (password === 'admin123') { // Simple password protection
+                            localStorage.removeItem('birthdayMessages');
+                            loadMessages();
+                            alert('All messages have been cleared.');
+                        } else {
+                            alert('Incorrect password.');
+                        }
+                    }
+                });
+
+                messagesContainer.appendChild(clearButton);
+            };
+
+            // Uncomment the next line if you want to add the clear button
+            // addClearButton();
         });
 
         // Prevent right-click on images 
@@ -1560,7 +1536,21 @@
                 this.src = canvas.toDataURL('image/jpeg');
             });
         });
+
+        // Add mobile-specific optimizations
+        if ('ontouchstart' in window) {
+            // Add touch feedback for mobile devices
+            document.querySelectorAll('.btn-submit, .nav-tab, .milestone-card').forEach(element => {
+                element.addEventListener('touchstart', function () {
+                    this.style.transform = 'scale(0.95)';
+                });
+                element.addEventListener('touchend', function () {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        }
     </script>
+
 </body>
 
 </html>
