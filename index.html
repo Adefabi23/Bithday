@@ -1272,6 +1272,19 @@
         <i class="fas fa-check-circle"></i> Your message has been saved successfully!
     </div>
     <script>
+        // Check if localStorage is available
+        function isLocalStorageAvailable() {
+            try {
+                const testKey = '__test__';
+                localStorage.setItem(testKey, testKey);
+                localStorage.removeItem(testKey);
+                return true;
+            } catch (e) {
+                console.error('localStorage is not available:', e);
+                return false;
+            }
+        }
+
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', () => {
@@ -1314,37 +1327,48 @@
 
         // Function to load messages from localStorage
         function loadMessages() {
-            const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
-            const messagesContainer = document.getElementById('messages-container');
-            messagesContainer.innerHTML = '';
+            if (!isLocalStorageAvailable()) {
+                console.error('localStorage is not available');
+                showErrorMessage('Your browser does not support message storage. Please try a different browser.');
+                return;
+            }
 
-            if (messages.length === 0) {
-                // Add default messages if none exist
-                const defaultMessages = [
-                    {
-                        author: "Grandma",
-                        date: "Today",
-                        content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy. We love you more than words can say!"
-                    },
-                    {
-                        author: "Aunt Sarah",
-                        date: "Today",
-                        content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
-                    }
-                ];
+            try {
+                const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+                const messagesContainer = document.getElementById('messages-container');
+                messagesContainer.innerHTML = '';
 
-                // Save default messages to localStorage
-                localStorage.setItem('birthdayMessages', JSON.stringify(defaultMessages));
+                if (messages.length === 0) {
+                    // Add default messages if none exist
+                    const defaultMessages = [
+                        {
+                            author: "Grandma",
+                            date: "Today",
+                            content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy! We love you more than words can say!"
+                        },
+                        {
+                            author: "Aunt Sarah",
+                            date: "Today",
+                            content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
+                        }
+                    ];
 
-                // Display default messages
-                defaultMessages.forEach(message => {
-                    addMessageToDOM(message);
-                });
-            } else {
-                // Display saved messages
-                messages.forEach(message => {
-                    addMessageToDOM(message);
-                });
+                    // Save default messages to localStorage
+                    localStorage.setItem('birthdayMessages', JSON.stringify(defaultMessages));
+
+                    // Display default messages
+                    defaultMessages.forEach(message => {
+                        addMessageToDOM(message);
+                    });
+                } else {
+                    // Display saved messages
+                    messages.forEach(message => {
+                        addMessageToDOM(message);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                showErrorMessage('Error loading messages. Please refresh the page.');
             }
         }
 
@@ -1383,6 +1407,49 @@
             }, 3000);
         }
 
+        // Function to show error message
+        function showErrorMessage(message) {
+            // Create error message element if it doesn't exist
+            let errorMessage = document.getElementById('error-message');
+            if (!errorMessage) {
+                errorMessage = document.createElement('div');
+                errorMessage.id = 'error-message';
+                errorMessage.className = 'error-message';
+                errorMessage.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #ff6b6b;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+                z-index: 1000;
+                transform: translateX(120%);
+                transition: transform 0.5s ease;
+                font-weight: 600;
+                max-width: 300px;
+            `;
+                document.body.appendChild(errorMessage);
+            }
+
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+
+            // Add show class styles
+            const style = document.createElement('style');
+            style.textContent = `
+            .error-message.show {
+                transform: translateX(0);
+            }
+        `;
+            document.head.appendChild(style);
+
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+
         // Function to show loading state
         function showLoadingState(form, isLoading) {
             const submitButton = form.querySelector('.btn-submit');
@@ -1394,6 +1461,38 @@
                 submitButton.disabled = false;
                 submitButton.innerHTML = 'Post Message';
                 submitButton.style.opacity = '1';
+            }
+        }
+
+        // Function to save message to localStorage
+        function saveMessage(message) {
+            if (!isLocalStorageAvailable()) {
+                throw new Error('localStorage is not available');
+            }
+
+            try {
+                // Get existing messages
+                let messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+
+                // Check storage quota
+                const currentSize = JSON.stringify(messages).length;
+                const newSize = currentSize + JSON.stringify(message).length;
+                const maxSize = 4.5 * 1024 * 1024; // 4.5MB (leaving some buffer)
+
+                if (newSize > maxSize) {
+                    throw new Error('Storage quota exceeded. Please remove some old messages.');
+                }
+
+                // Add new message
+                messages.unshift(message);
+
+                // Save to localStorage
+                localStorage.setItem('birthdayMessages', JSON.stringify(messages));
+
+                return true;
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+                throw error;
             }
         }
 
@@ -1410,13 +1509,13 @@
                 const message = document.getElementById('message').value.trim();
 
                 if (!name) {
-                    alert('Please enter your name.');
+                    showErrorMessage('Please enter your name.');
                     document.getElementById('name').focus();
                     return;
                 }
 
                 if (!message) {
-                    alert('Please enter a message.');
+                    showErrorMessage('Please enter a message.');
                     document.getElementById('message').focus();
                     return;
                 }
@@ -1434,14 +1533,8 @@
                         content: message
                     };
 
-                    // Get existing messages from localStorage
-                    let messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
-
-                    // Add new message to the beginning
-                    messages.unshift(newMessage);
-
-                    // Save updated messages to localStorage
-                    localStorage.setItem('birthdayMessages', JSON.stringify(messages));
+                    // Save message to localStorage
+                    saveMessage(newMessage);
 
                     // Add new message to DOM
                     addMessageToDOM(newMessage);
@@ -1463,11 +1556,10 @@
 
                     // Optional: Log to console for debugging
                     console.log('Message saved successfully:', newMessage);
-                    console.log('Total messages saved:', messages.length);
 
                 } catch (error) {
                     console.error('Error saving message:', error);
-                    alert('There was an error saving your message. Please try again.');
+                    showErrorMessage(error.message || 'There was an error saving your message. Please try again.');
                 } finally {
                     // Hide loading state
                     showLoadingState(this, false);
@@ -1490,11 +1582,15 @@
                     if (confirm('Are you sure you want to clear all messages? This action cannot be undone.')) {
                         const password = prompt('Please enter admin password:');
                         if (password === 'admin123') { // Simple password protection
-                            localStorage.removeItem('birthdayMessages');
-                            loadMessages();
-                            alert('All messages have been cleared.');
+                            if (isLocalStorageAvailable()) {
+                                localStorage.removeItem('birthdayMessages');
+                                loadMessages();
+                                alert('All messages have been cleared.');
+                            } else {
+                                showErrorMessage('Cannot clear messages: localStorage not available');
+                            }
                         } else {
-                            alert('Incorrect password.');
+                            showErrorMessage('Incorrect password.');
                         }
                     }
                 });
