@@ -46,38 +46,38 @@ exports.handler = async (event, context) => {
           res.on('data', (chunk) => body += chunk);
           res.on('end', () => {
             console.log('API Response status:', res.statusCode);
-            console.log('API Response headers:', res.headers);
             
             try {
               if (res.statusCode === 200) {
                 const parsed = JSON.parse(body);
                 console.log('Successfully parsed response, type:', typeof parsed);
-                console.log('Response content:', JSON.stringify(parsed, null, 2));
                 resolve(parsed);
+              } else if (res.statusCode === 404) {
+                // 404 means no form submissions found yet
+                console.log('No form submissions found (404), returning default messages');
+                resolve([]);
               } else {
                 console.error('API returned non-200 status:', res.statusCode);
                 console.error('API response:', body);
-                // If we get an error, return default messages
-                resolve(defaultMessages);
+                resolve([]);
               }
             } catch (e) {
               console.error('Error parsing API response:', e);
               console.error('Response body:', body);
-              resolve(defaultMessages);
+              resolve([]);
             }
           });
         });
         
         req.on('error', (error) => {
           console.error('API request error:', error);
-          // If there's a network error, return default messages
-          resolve(defaultMessages);
+          resolve([]);
         });
         
         req.setTimeout(10000, () => {
           console.error('API request timed out');
           req.destroy();
-          resolve(defaultMessages);
+          resolve([]);
         });
         
         req.end();
@@ -96,8 +96,9 @@ exports.handler = async (event, context) => {
         };
       }
 
-      // Transform the submissions to match your expected format
       console.log('Processing', data.length, 'submissions');
+      
+      // Transform the submissions to match your expected format
       const messages = data
         .filter(submission => {
           // Filter out submissions that don't have the expected structure
