@@ -1272,19 +1272,6 @@
         <i class="fas fa-check-circle"></i> Your message has been saved successfully!
     </div>
     <script>
-        // Check if localStorage is available
-        function isLocalStorageAvailable() {
-            try {
-                const testKey = '__test__';
-                localStorage.setItem(testKey, testKey);
-                localStorage.removeItem(testKey);
-                return true;
-            } catch (e) {
-                console.error('localStorage is not available:', e);
-                return false;
-            }
-        }
-
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', () => {
@@ -1325,50 +1312,43 @@
             }
         }
 
-        // Function to load messages from localStorage
-        function loadMessages() {
-            if (!isLocalStorageAvailable()) {
-                console.error('localStorage is not available');
-                showErrorMessage('Your browser does not support message storage. Please try a different browser.');
-                return;
-            }
+        // Function to load messages from Netlify
+        async function loadMessages() {
+            const messagesContainer = document.getElementById('messages-container');
+            messagesContainer.innerHTML = '';
 
             try {
-                const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
-                const messagesContainer = document.getElementById('messages-container');
-                messagesContainer.innerHTML = '';
-
-                if (messages.length === 0) {
-                    // Add default messages if none exist
-                    const defaultMessages = [
-                        {
-                            author: "Grandma",
-                            date: "Today",
-                            content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy! We love you more than words can say!"
-                        },
-                        {
-                            author: "Aunt Sarah",
-                            date: "Today",
-                            content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
-                        }
-                    ];
-
-                    // Save default messages to localStorage
-                    localStorage.setItem('birthdayMessages', JSON.stringify(defaultMessages));
-
-                    // Display default messages
-                    defaultMessages.forEach(message => {
-                        addMessageToDOM(message);
-                    });
-                } else {
-                    // Display saved messages
-                    messages.forEach(message => {
-                        addMessageToDOM(message);
-                    });
+                const response = await fetch('/api/messages');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                const messages = await response.json();
+
+                // Display messages
+                messages.forEach(message => {
+                    addMessageToDOM(message);
+                });
             } catch (error) {
                 console.error('Error loading messages:', error);
                 showErrorMessage('Error loading messages. Please refresh the page.');
+
+                // Show default messages as fallback
+                const defaultMessages = [
+                    {
+                        author: "Grandma",
+                        date: "Today",
+                        content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy! We love you more than words can say!"
+                    },
+                    {
+                        author: "Aunt Sarah",
+                        date: "Today",
+                        content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
+                    }
+                ];
+
+                defaultMessages.forEach(message => {
+                    addMessageToDOM(message);
+                });
             }
         }
 
@@ -1464,41 +1444,9 @@
             }
         }
 
-        // Function to save message to localStorage
-        function saveMessage(message) {
-            if (!isLocalStorageAvailable()) {
-                throw new Error('localStorage is not available');
-            }
-
-            try {
-                // Get existing messages
-                let messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
-
-                // Check storage quota
-                const currentSize = JSON.stringify(messages).length;
-                const newSize = currentSize + JSON.stringify(message).length;
-                const maxSize = 4.5 * 1024 * 1024; // 4.5MB (leaving some buffer)
-
-                if (newSize > maxSize) {
-                    throw new Error('Storage quota exceeded. Please remove some old messages.');
-                }
-
-                // Add new message
-                messages.unshift(message);
-
-                // Save to localStorage
-                localStorage.setItem('birthdayMessages', JSON.stringify(messages));
-
-                return true;
-            } catch (error) {
-                console.error('Error saving to localStorage:', error);
-                throw error;
-            }
-        }
-
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
-            // Load messages from localStorage
+            // Load messages from Netlify
             loadMessages();
 
             // Handle form submission
@@ -1524,7 +1472,7 @@
                     // Show loading state
                     showLoadingState(this, true);
 
-                    // Create new message object
+                    // Create new message object to display immediately
                     const currentDate = new Date();
                     const formattedDate = currentDate.toLocaleDateString();
                     const newMessage = {
@@ -1533,11 +1481,11 @@
                         content: message
                     };
 
-                    // Save message to localStorage
-                    saveMessage(newMessage);
-
-                    // Add new message to DOM
+                    // Add new message to DOM immediately
                     addMessageToDOM(newMessage);
+
+                    // Netlify will handle the form submission automatically
+                    // because we have data-netlify="true" on the form
 
                     // Reset form
                     this.reset();
@@ -1554,52 +1502,19 @@
                         block: 'start'
                     });
 
-                    // Optional: Log to console for debugging
-                    console.log('Message saved successfully:', newMessage);
+                    // Reload messages after a short delay to get the updated list
+                    setTimeout(() => {
+                        loadMessages();
+                    }, 1000);
 
                 } catch (error) {
-                    console.error('Error saving message:', error);
-                    showErrorMessage(error.message || 'There was an error saving your message. Please try again.');
+                    console.error('Error submitting message:', error);
+                    showErrorMessage('There was an error saving your message. Please try again.');
                 } finally {
                     // Hide loading state
                     showLoadingState(this, false);
                 }
             });
-
-            // Add a clear all messages button for admin (optional)
-            const addClearButton = () => {
-                const messagesContainer = document.getElementById('messages-container');
-                const clearButton = document.createElement('button');
-                clearButton.innerHTML = '<i class="fas fa-trash"></i> Clear All Messages (Admin Only)';
-                clearButton.className = 'btn-submit';
-                clearButton.style.marginTop = '20px';
-                clearButton.style.backgroundColor = '#ff6b6b';
-                clearButton.style.display = 'block';
-                clearButton.style.marginLeft = 'auto';
-                clearButton.style.marginRight = 'auto';
-
-                clearButton.addEventListener('click', function () {
-                    if (confirm('Are you sure you want to clear all messages? This action cannot be undone.')) {
-                        const password = prompt('Please enter admin password:');
-                        if (password === 'admin123') { // Simple password protection
-                            if (isLocalStorageAvailable()) {
-                                localStorage.removeItem('birthdayMessages');
-                                loadMessages();
-                                alert('All messages have been cleared.');
-                            } else {
-                                showErrorMessage('Cannot clear messages: localStorage not available');
-                            }
-                        } else {
-                            showErrorMessage('Incorrect password.');
-                        }
-                    }
-                });
-
-                messagesContainer.appendChild(clearButton);
-            };
-
-            // Uncomment the next line if you want to add the clear button
-            // addClearButton();
         });
 
         // Prevent right-click on images 

@@ -8,8 +8,3 @@
   from = "/api/messages"
   to = "/.netlify/functions/get-messages"
   status = 200
-
-[[redirects]]
-  from = "/api/submit-message"
-  to = "/.netlify/functions/submit-message"
-  status = 200
