@@ -313,8 +313,8 @@
             margin-bottom: 15px;
             box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
             height: 0;
-            padding-bottom: 75%;
-            /* 4:3 Aspect Ratio */
+            padding-bottom: 100%;
+            /* Increased from 75% to 100% for larger images */
             background-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -325,7 +325,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* Changed from cover to contain */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -406,8 +405,8 @@
             position: relative;
             overflow: hidden;
             height: 0;
-            padding-bottom: 56.25%;
-            /* 16:9 Aspect Ratio */
+            padding-bottom: 75%;
+            /* Increased from 56.25% to 75% for larger images */
             background-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -418,7 +417,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* Changed from cover to contain */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -428,6 +426,56 @@
 
         .milestone-card:hover .milestone-image {
             transform: scale(1.05);
+        }
+
+        /* Video Container Styles */
+        .milestone-video-container {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 75%;
+            /* 4:3 Aspect Ratio */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .milestone-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 105, 180, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .video-play-button:hover {
+            background: rgba(255, 105, 180, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-play-button i {
+            color: white;
+            font-size: 24px;
         }
 
         /* Guestbook Styles */
@@ -742,8 +790,8 @@
             position: relative;
             overflow: hidden;
             height: 0;
-            padding-bottom: 75%;
-            /* 4:3 Aspect Ratio */
+            padding-bottom: 100%;
+            /* Increased from 75% to 100% for larger images */
             background-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -754,7 +802,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* Changed from cover to contain */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -856,8 +903,8 @@
             }
 
             .random-photo-container {
-                padding-bottom: 75%;
-                /* Maintain aspect ratio on mobile */
+                padding-bottom: 100%;
+                /* Maintain larger aspect ratio on mobile */
             }
 
             .random-photo-caption {
@@ -872,6 +919,16 @@
 
             .success-message h3 {
                 font-size: 1.5rem;
+            }
+
+            /* Keep larger images on mobile */
+            .media-container {
+                padding-bottom: 100%;
+            }
+
+            .milestone-image-container,
+            .milestone-video-container {
+                padding-bottom: 75%;
             }
         }
 
@@ -1192,7 +1249,7 @@
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="./assets/mamaAm.jpg" alt="Special Moment 8" class="random-photo">
+                            <img src="./assets/mumAm.jpg" alt="Special Moment 8" class="random-photo">
                         </div>
                         <div class="random-photo-caption">First eid kabir</div>
                     </div>
@@ -1226,6 +1283,20 @@
                         </div>
                         <div class="random-photo-caption">Try out glasses</div>
                     </div>
+                    <!-- New Picture Card 1: Naming day with daddy and mum -->
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/namingday.jpg" alt="Naming day with daddy and mum" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Naming day with daddy and mum</div>
+                    </div>
+                    <!-- New Picture Card 2: About to come to the world -->
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/birth.jpg" alt="About to come to the world" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">About to come to the world</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1234,10 +1305,9 @@
             <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Growth Tracker</h2>
             <div class="milestone-container">
                 <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-smile"></i> First Smile</div>
+                    <div class="milestone-header"><i class="fas fa-smile"></i> First Smile from Ameerah</div>
                     <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babysmile/600/400.jpg" alt="First Smile"
-                            class="milestone-image">
+                        <img src="assets/1stSmileAm.jpg" alt="First Smile" class="milestone-image">
                     </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Week 6</div>
@@ -1308,6 +1378,42 @@
                             Armani following a week later. Walking together now!</div>
                     </div>
                 </div>
+                <!-- New Video Card 1: Our first word -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-video"></i> Our First Word</div>
+                    <div class="milestone-video-container">
+                        <video class="milestone-video" poster="https://picsum.photos/seed/firstword/600/400.jpg">
+                            <source src="./assets/firstword.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-play-button" onclick="playVideo(this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 9</div>
+                        <div class="milestone-description">Watch Armani and Ameerah say their first words! Ameerah said
+                            "Mama" and Armani said "Dada". Such precious moments captured on video.</div>
+                    </div>
+                </div>
+                <!-- New Video Card 2: Eating food -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
+                    <div class="milestone-video-container">
+                        <video class="milestone-video" poster="https://picsum.photos/seed/eatingfood/600/400.jpg">
+                            <source src="./assets/eatingfood.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-play-button" onclick="playVideo(this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date">Month 6</div>
+                        <div class="milestone-description">First time trying solid food! Watch their adorable reactions
+                            as they taste mashed sweet potatoes for the first time.</div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- Guestbook Section -->
@@ -1343,7 +1449,6 @@
         </div>
     </div>
     <div class="watermark">© Armani & Ameerah's First Year</div>
-
     <!-- Overlay and Success Message -->
     <div class="overlay" id="overlay"></div>
     <div class="success-message" id="success-message">
@@ -1352,7 +1457,6 @@
         <p>Your message has been saved successfully!</p>
         <button class="btn-close" id="close-success">Continue</button>
     </div>
-
     <script>
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1453,11 +1557,9 @@
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
             const overlay = document.getElementById('overlay');
-
             // Show overlay and success message
             overlay.classList.add('show');
             successMessage.classList.add('show');
-
             // Create confetti effect
             createConfetti({ pageY: window.innerHeight / 2 });
         }
@@ -1465,11 +1567,9 @@
         function hideSuccessMessage() {
             const successMessage = document.getElementById('success-message');
             const overlay = document.getElementById('overlay');
-
             // Hide overlay and success message
             overlay.classList.remove('show');
             successMessage.classList.remove('show');
-
             // Redirect to success page after closing
             setTimeout(() => {
                 window.location.href = 'success.html';
@@ -1527,14 +1627,33 @@
                 submitButton.style.opacity = '1';
             }
         }
+        // Function to play videos
+        function playVideo(button) {
+            const videoContainer = button.parentElement;
+            const video = videoContainer.querySelector('.milestone-video');
+
+            if (video.paused) {
+                video.play();
+                button.style.display = 'none';
+
+                // When video ends, show the play button again
+                video.onended = function () {
+                    button.style.display = 'flex';
+                };
+            } else {
+                video.pause();
+                button.style.display = 'flex';
+            }
+
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             // Load messages from Netlify
             loadMessages();
-
             // Close success message button
             document.getElementById('close-success').addEventListener('click', hideSuccessMessage);
-
             // Handle form submission
             document.getElementById('guestbook-form').addEventListener('submit', function (e) {
                 console.log('Form submitted');
