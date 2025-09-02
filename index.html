@@ -1435,27 +1435,33 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Load messages from Netlify
             loadMessages();
-
             // Handle form submission
             document.getElementById('guestbook-form').addEventListener('submit', function (e) {
+                console.log('Form submitted');
                 e.preventDefault();
 
                 const name = document.getElementById('name').value.trim();
                 const message = document.getElementById('message').value.trim();
 
+                console.log('Name:', name, 'Message:', message);
+
                 if (!name) {
+                    console.log('Name is empty');
                     showErrorMessage('Please enter your name.');
                     document.getElementById('name').focus();
                     return;
                 }
 
                 if (!message) {
+                    console.log('Message is empty');
                     showErrorMessage('Please enter a message.');
                     document.getElementById('message').focus();
                     return;
                 }
 
                 try {
+                    console.log('Processing form submission');
+
                     // Show loading state
                     showLoadingState(this, true);
 
@@ -1468,56 +1474,68 @@
                         content: message
                     };
 
+                    console.log('New message object:', newMessage);
+
                     // Add new message to DOM immediately
                     addMessageToDOM(newMessage);
 
-                    // Submit the form using Netlify's built-in handling
-                    // We'll use the native form submission method
+                    // Submit the form using traditional form submission
+                    console.log('Submitting form using traditional method');
+
+                    // Create a temporary form element for submission
+                    const tempForm = document.createElement('form');
+                    tempForm.method = 'POST';
+                    tempForm.action = '/success.html'; // Redirect to success page
+                    tempForm.style.display = 'none';
+
+                    // Copy all form data to the temporary form
                     const formData = new FormData(this);
+                    for (const [key, value] of formData.entries()) {
+                        const input = document.createElement('input');
+                        input.name = key;
+                        input.value = value;
+                        tempForm.appendChild(input);
+                    }
 
-                    fetch('/', {
-                        method: 'POST',
-                        body: formData
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                // Reset form
-                                this.reset();
+                    // Add the temporary form to the document
+                    document.body.appendChild(tempForm);
 
-                                // Show success message
-                                showSuccessMessage();
+                    // Submit the form
+                    tempForm.submit();
 
-                                // Create confetti effect
-                                createConfetti({ pageY: window.innerHeight / 2 });
+                    // Remove the temporary form after a short delay
+                    setTimeout(() => {
+                        document.body.removeChild(tempForm);
+                    }, 1000);
 
-                                // Scroll to top of messages
-                                document.getElementById('messages-container').scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'start'
-                                });
+                    // Show success message immediately
+                    showSuccessMessage();
 
-                                // Reload messages after a short delay to get the updated list
-                                setTimeout(() => {
-                                    loadMessages();
-                                }, 1000);
-                            } else {
-                                throw new Error('Network response was not ok.');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error submitting message:', error);
-                            showErrorMessage('There was an error saving your message. Please try again.');
-                        })
-                        .finally(() => {
-                            // Hide loading state
-                            showLoadingState(this, false);
+                    // Create confetti effect
+                    createConfetti({ pageY: window.innerHeight / 2 });
+
+                    // Scroll to top of messages
+                    const messagesContainer = document.getElementById('messages-container');
+                    if (messagesContainer) {
+                        messagesContainer.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
                         });
+                    }
+
+                    // Reset form
+                    this.reset();
+
+                    // Hide loading state
+                    showLoadingState(this, false);
+
                 } catch (error) {
                     console.error('Error in form submission:', error);
                     showErrorMessage('There was an error saving your message. Please try again.');
                     showLoadingState(this, false);
                 }
             });
+
         });
 
         // Prevent right-click on images 
