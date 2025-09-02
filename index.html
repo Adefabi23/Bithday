@@ -312,13 +312,20 @@
             border-radius: 10px;
             margin-bottom: 15px;
             box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
-            height: 250px;
+            height: 0;
+            padding-bottom: 75%;
+            /* 4:3 Aspect Ratio */
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .protected-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            /* Changed from cover to contain */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -395,10 +402,23 @@
             line-height: 1.5;
         }
 
+        .milestone-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
         .milestone-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: contain;
+            /* Changed from cover to contain */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -589,24 +609,87 @@
             color: #ff85c1;
         }
 
-        /* Success Message */
+        /* Success Message - Enhanced */
         .success-message {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #ff69b4, #ff85c1);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #ff69b4;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
             z-index: 1000;
-            transform: translateX(120%);
-            transition: transform 0.5s ease;
-            font-weight: 600;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 105, 180, 0.2);
+            max-width: 90%;
+            width: 400px;
         }
 
         .success-message.show {
-            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-message i {
+            font-size: 50px;
+            color: #ff69b4;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .success-message h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ff69b4;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #ff85c1;
+        }
+
+        .success-message .btn-close {
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .success-message .btn-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Overlay for success message */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Random Photos Section - Enhanced Styles */
@@ -658,13 +741,20 @@
         .random-photo-container {
             position: relative;
             overflow: hidden;
-            height: 220px;
+            height: 0;
+            padding-bottom: 75%;
+            /* 4:3 Aspect Ratio */
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .random-photo {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            /* Changed from cover to contain */
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -766,12 +856,22 @@
             }
 
             .random-photo-container {
-                height: 180px;
+                padding-bottom: 75%;
+                /* Maintain aspect ratio on mobile */
             }
 
             .random-photo-caption {
                 padding: 12px;
                 font-size: 1rem;
+            }
+
+            .success-message {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .success-message h3 {
+                font-size: 1.5rem;
             }
         }
 
@@ -1086,13 +1186,13 @@
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="assets\ArmaniEid.jpg" alt="Special Moment 7" class="random-photo">
+                            <img src="./assets/ArmaniEid.jpg" alt="Special Moment 7" class="random-photo">
                         </div>
                         <div class="random-photo-caption">First eid kabir</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="assets\mumAm.jpg" alt="Special Moment 8" class="random-photo">
+                            <img src="./assets/mamaAm.jpg" alt="Special Moment 8" class="random-photo">
                         </div>
                         <div class="random-photo-caption">First eid kabir</div>
                     </div>
@@ -1135,8 +1235,10 @@
             <div class="milestone-container">
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-smile"></i> First Smile</div>
-                    <img src="https://picsum.photos/seed/babysmile/600/400.jpg" alt="First Smile"
-                        class="milestone-image">
+                    <div class="milestone-image-container">
+                        <img src="https://picsum.photos/seed/babysmile/600/400.jpg" alt="First Smile"
+                            class="milestone-image">
+                    </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Week 6</div>
                         <div class="milestone-description">Both Armani and Ameerah blessed us with their first smiles at
@@ -1145,7 +1247,9 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
-                    <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
+                    <div class="milestone-image-container">
+                        <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
+                    </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Month 4</div>
                         <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
@@ -1158,8 +1262,10 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-utensils"></i> First Solid Food</div>
-                    <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
-                        class="milestone-image">
+                    <div class="milestone-image-container">
+                        <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
+                            class="milestone-image">
+                    </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Month 6</div>
                         <div class="milestone-description">Both tried mashed sweet potatoes. Ameerah loved it, while
@@ -1168,8 +1274,10 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-comments"></i> First Words</div>
-                    <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
-                        class="milestone-image">
+                    <div class="milestone-image-container">
+                        <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
+                            class="milestone-image">
+                    </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Month 9</div>
                         <div class="milestone-description">Ameerah said "Mama" first, while Armani's first word was
@@ -1178,7 +1286,10 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-baby"></i> Crawling</div>
-                    <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling" class="milestone-image">
+                    <div class="milestone-image-container">
+                        <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling"
+                            class="milestone-image">
+                    </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Month 8</div>
                         <div class="milestone-description">Armani started the army crawl first, while Ameerah perfected
@@ -1187,8 +1298,10 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-walking"></i> First Steps</div>
-                    <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
-                        class="milestone-image">
+                    <div class="milestone-image-container">
+                        <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
+                            class="milestone-image">
+                    </div>
                     <div class="milestone-content">
                         <div class="milestone-date">Month 12</div>
                         <div class="milestone-description">Ameerah took her first steps just before their birthday, with
@@ -1202,7 +1315,7 @@
             <div class="guestbook-container">
                 <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Birthday Messages</h2>
                 <form name="birthday-messages" method="POST" data-netlify="true" class="guestbook-form"
-                    id="guestbook-form">
+                    id="guestbook-form" action="success.html">
                     <input type="hidden" name="form-name" value="birthday-messages">
                     <div class="form-group">
                         <label for="name">Your Name</label>
@@ -1230,9 +1343,16 @@
         </div>
     </div>
     <div class="watermark">© Armani & Ameerah's First Year</div>
+
+    <!-- Overlay and Success Message -->
+    <div class="overlay" id="overlay"></div>
     <div class="success-message" id="success-message">
-        <i class="fas fa-check-circle"></i> Your message has been saved successfully!
+        <i class="fas fa-check-circle"></i>
+        <h3>Thank You!</h3>
+        <p>Your message has been saved successfully!</p>
+        <button class="btn-close" id="close-success">Continue</button>
     </div>
+
     <script>
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1332,10 +1452,28 @@
         // Function to show success message
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
+            const overlay = document.getElementById('overlay');
+
+            // Show overlay and success message
+            overlay.classList.add('show');
             successMessage.classList.add('show');
+
+            // Create confetti effect
+            createConfetti({ pageY: window.innerHeight / 2 });
+        }
+        // Function to hide success message
+        function hideSuccessMessage() {
+            const successMessage = document.getElementById('success-message');
+            const overlay = document.getElementById('overlay');
+
+            // Hide overlay and success message
+            overlay.classList.remove('show');
+            successMessage.classList.remove('show');
+
+            // Redirect to success page after closing
             setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
+                window.location.href = 'success.html';
+            }, 500);
         }
         // Function to show error message
         function showErrorMessage(message) {
@@ -1393,6 +1531,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Load messages from Netlify
             loadMessages();
+
+            // Close success message button
+            document.getElementById('close-success').addEventListener('click', hideSuccessMessage);
+
             // Handle form submission
             document.getElementById('guestbook-form').addEventListener('submit', function (e) {
                 console.log('Form submitted');
@@ -1452,8 +1594,6 @@
                     }, 1000);
                     // Show success message immediately
                     showSuccessMessage();
-                    // Create confetti effect
-                    createConfetti({ pageY: window.innerHeight / 2 });
                     // Scroll to top of messages
                     const messagesContainer = document.getElementById('messages-container');
                     if (messagesContainer) {
