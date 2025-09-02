@@ -405,8 +405,8 @@
             position: relative;
             overflow: hidden;
             height: 0;
-            padding-bottom: 75%;
-            /* Increased from 56.25% to 75% for larger images */
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
             background-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -428,60 +428,13 @@
             transform: scale(1.05);
         }
 
-        /* Dual Image Container */
-        .dual-image-container {
-            display: flex;
-            gap: 10px;
-            height: 0;
-            padding-bottom: 75%;
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .dual-image {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .dual-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-            user-select: none;
-            -webkit-user-drag: none;
-            -webkit-touch-callout: none;
-            transition: transform 0.5s ease;
-        }
-
-        .milestone-card:hover .dual-image img {
-            transform: scale(1.05);
-        }
-
-        .dual-image-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 105, 180, 0.7);
-            color: white;
-            padding: 5px;
-            font-size: 0.8rem;
-            text-align: center;
-            font-weight: bold;
-        }
-
         /* Video Container Styles */
         .milestone-video-container {
             position: relative;
             overflow: hidden;
             height: 0;
-            padding-bottom: 75%;
-            /* 4:3 Aspect Ratio */
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
             background-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -975,7 +928,7 @@
 
             .milestone-image-container,
             .milestone-video-container {
-                padding-bottom: 75%;
+                padding-bottom: 56.25%;
             }
         }
 
@@ -1352,139 +1305,141 @@
         <section id="milestones" class="content-section">
             <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Growth Tracker</h2>
             <div class="milestone-container">
-                <!-- Updated First Smile card with both Armani and Ameerah -->
-                <!-- Updated First Smile card with both Armani and Ameerah -->
+                <!-- First Smile Card for Ameerah -->
                 <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-smile"></i> First Smiles</div>
-                    <div class="dual-image-container">
-                        <div class="dual-image">
-                            <img src="./assets/1stSmileAm.jpg" alt="Ameerah's First Smile"
-                                onerror="this.src='https://picsum.photos/seed/ameerahsmile/300/300.jpg'">
-                            <div class="dual-image-label">Ameerah</div>
+                    <div class="milestone-header"><i class="fas fa-smile"></i> Ameerah's First Smile</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/1stSmileAm.jpg" alt="Ameerah's First Smile" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Ameerah blessed us with her first beautiful smile during a
+                            morning cuddle session.</div>
+                    </div>
+                </div>
+
+                <!-- First Smile Card for Armani -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-smile"></i> Armani's First Smile</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/1stSmileAr.jpg" alt="Armani's First Smile" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Armani blessed us with her first beautiful smile during a
+                            morning cuddle session.</div>
+                    </div>
+                </div>
+
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
+                            special space is a great spot for them to play safely while their parents do other things.
                         </div>
-                        <div class="dual-image">
-                            <img src="./assets/1stSmileAr.jpg" alt="Armani's First Smile"
-                                onerror="this.src='https://picsum.photos/seed/armanismile/300/300.jpg'">
-                            <div class="dual-image-label">Armani</div>
+                    </div>
+                </div>
+
+                <!-- New Card: Ameerah going out for ear piercing -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-gem"></i> Ameerah's Ear Piercing</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/prepAm.jpg" alt="Ameerah Ear Piercing" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Ameerah's special day getting her ears pierced. She was so
+                            brave and looks beautiful with her new earrings!</div>
+                    </div>
+                </div>
+
+                <!-- New Card: Armani going out for ear piercing -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-gem"></i> Armani's Ear Piercing</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/prepAr.jpg" alt="Armani Ear Piercing" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Armani's special day getting her ears pierced. She was so
+                            brave and looks beautiful with her new earrings!</div>
+                    </div>
+                </div>
+
+                <!-- Video Card: Our first word -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-video"></i> Our First Word</div>
+                    <div class="milestone-video-container">
+                        <video class="milestone-video" poster="assets/firstword.mp4">
+                            <source src="./assets/firstword.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-play-button" onclick="playVideo(this)">
+                            <i class="fas fa-play"></i>
                         </div>
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Week 6</div>
-                        <div class="milestone-description">Both Armani and Ameerah blessed us with their first smiles at
-                            the same time
-                            during a morning cuddle session.</div>
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Our first words were Allahu Akbar! Watch Armani and Ameerah
+                            say their first words. Such precious moments captured on video.</div>
+                    </div>
+                </div>
+
+                <!-- Video Card: Eating food -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
+                    <div class="milestone-video-container">
+                        <video class="milestone-video" poster="assets/eatingFood.mp4">
+                            <source src="./assets/eatingfood.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-play-button" onclick="playVideo(this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">This was a beautiful moment we shared while we were eating
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="milestone-card" onclick="createConfetti(event)">
-                <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
-                <div class="milestone-image-container">
-                    <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
-                </div>
-                <div class="milestone-content">
-                    <div class="milestone-date"></div>
-                    <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
-                        special space is a great spot for them to play safely while their parents do other things.
+        </section>
+        <!-- Guestbook Section -->
+        <section id="guestbook" class="content-section">
+            <div class="guestbook-container">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Birthday Messages</h2>
+                <form name="birthday-messages" method="POST" data-netlify="true" class="guestbook-form"
+                    id="guestbook-form" action="success.html">
+                    <input type="hidden" name="form-name" value="birthday-messages">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                </div>
-            </div>
-
-            <!-- New Card: Ameerah going out for ear piercing -->
-            <div class="milestone-card" onclick="createConfetti(event)">
-                <div class="milestone-header"><i class="fas fa-gem"></i> Ameerah's Ear Piercing</div>
-                <div class="milestone-image-container">
-                    <img src="assets/prepAm.jpg" alt="Ameerah Ear Piercing" class="milestone-image">
-                </div>
-                <div class="milestone-content">
-                    <div class="milestone-date"></div>
-                    <div class="milestone-description">Ameerah's special day getting her ears pierced. She was so
-                        brave and looks beautiful with her new earrings!</div>
-                </div>
-            </div>
-
-            <!-- New Card: Armani going out for ear piercing -->
-            <div class="milestone-card" onclick="createConfetti(event)">
-                <div class="milestone-header"><i class="fas fa-gem"></i> Armani's Ear Piercing</div>
-                <div class="milestone-image-container">
-                    <img src="assets/prepAr.jpg" alt="Armani Ear Piercing" class="milestone-image">
-                </div>
-                <div class="milestone-content">
-                    <div class="milestone-date"></div>
-                    <div class="milestone-description">Armani's special day getting her ears pierced. She was so
-                        brave and looks beautiful with her new earrings!</div>
-                </div>
-            </div>
-
-            <!-- Video Card: Our first word -->
-            <div class="milestone-card" onclick="createConfetti(event)">
-                <div class="milestone-header"><i class="fas fa-video"></i> Our First Word</div>
-                <div class="milestone-video-container">
-                    <video class="milestone-video" poster="assets/firstword.mp4">
-                        <source src="./assets/firstword.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="video-play-button" onclick="playVideo(this)">
-                        <i class="fas fa-play"></i>
+                    <div class="form-group">
+                        <label for="message">Birthday Message</label>
+                        <textarea id="message" name="message"
+                            placeholder="Leave a birthday message for Armani and Ameerah..." required></textarea>
                     </div>
-                </div>
-                <div class="milestone-content">
-                    <div class="milestone-date"></div>
-                    <div class="milestone-description">Our first words were Allahu Akbar! Watch Armani and Ameerah say
-                        their first words Such precious moments captured on video.</div>
-                </div>
-            </div>
-
-            <!-- Video Card: Eating food -->
-            <div class="milestone-card" onclick="createConfetti(event)">
-                <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
-                <div class="milestone-video-container">
-                    <video class="milestone-video" poster="assets/eatingFood.mp4">
-                        <source src="./assets/eatingfood.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="video-play-button" onclick="playVideo(this)">
-                        <i class="fas fa-play"></i>
-                    </div>
-                </div>
-                <div class="milestone-content">
-                    <div class="milestone-date"></div>
-                    <div class="milestone-description">This was a beautiful moment we shared while we were eating</div>
+                    <button type="submit" class="btn-submit">Post Message</button>
+                </form>
+                <div class="messages-container" id="messages-container">
+                    <!-- Messages will be loaded here -->
                 </div>
             </div>
-    </div>
-    </section>
-    <!-- Guestbook Section -->
-    <section id="guestbook" class="content-section">
-        <div class="guestbook-container">
-            <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Birthday Messages</h2>
-            <form name="birthday-messages" method="POST" data-netlify="true" class="guestbook-form" id="guestbook-form"
-                action="success.html">
-                <input type="hidden" name="form-name" value="birthday-messages">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Birthday Message</label>
-                    <textarea id="message" name="message"
-                        placeholder="Leave a birthday message for Armani and Ameerah..." required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Post Message</button>
-            </form>
-            <div class="messages-container" id="messages-container">
-                <!-- Messages will be loaded here -->
-            </div>
+        </section>
+        <div class="baby-footer">
+            <div class="baby-icon"><i class="fas fa-baby"></i></div>
+            <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
+            <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
         </div>
-    </section>
-    <div class="baby-footer">
-        <div class="baby-icon"><i class="fas fa-baby"></i></div>
-        <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
-        <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
-    </div>
-    <div class="credit-footer">
-        <i class="fas fa-heart"></i> Courtesy of Adefabi Junaid (Uncle Jay) <i class="fas fa-heart"></i>
-    </div>
+        <div class="credit-footer">
+            <i class="fas fa-heart"></i> Courtesy of Adefabi Junaid (Uncle Jay) <i class="fas fa-heart"></i>
+        </div>
     </div>
     <div class="watermark">© Armani & Ameerah's First Year</div>
     <!-- Overlay and Success Message -->
