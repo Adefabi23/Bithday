@@ -428,6 +428,53 @@
             transform: scale(1.05);
         }
 
+        /* Dual Image Container */
+        .dual-image-container {
+            display: flex;
+            gap: 10px;
+            height: 0;
+            padding-bottom: 75%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dual-image {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .dual-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            transition: transform 0.5s ease;
+        }
+
+        .milestone-card:hover .dual-image img {
+            transform: scale(1.05);
+        }
+
+        .dual-image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 105, 180, 0.7);
+            color: white;
+            padding: 5px;
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
         /* Video Container Styles */
         .milestone-video-container {
             position: relative;
@@ -1305,17 +1352,26 @@
         <section id="milestones" class="content-section">
             <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Growth Tracker</h2>
             <div class="milestone-container">
+                <!-- Updated First Smile card with both Armani and Ameerah -->
                 <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-smile"></i> First Smile from Ameerah</div>
-                    <div class="milestone-image-container">
-                        <img src="assets/1stSmileAm.jpg" alt="First Smile" class="milestone-image">
+                    <div class="milestone-header"><i class="fas fa-smile"></i> First Smiles</div>
+                    <div class="dual-image-container">
+                        <div class="dual-image">
+                            <img src="assets/1stSmileAm.jpg" alt="Ameerah's First Smile">
+                            <div class="dual-image-label"></div>
+                        </div>
+                        <div class="dual-image">
+                            <img src="assets/1stSmileAr.jpg" alt="Armani's First Smile">
+                            <div class="dual-image-label">Armani</div>
+                        </div>
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Week 6</div>
+                        <div class="milestone-date"></div>
                         <div class="milestone-description">Both Armani and Ameerah blessed us with their first smiles at
                             the same time during a morning cuddle session.</div>
                     </div>
                 </div>
+
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
                     <div class="milestone-image-container">
@@ -1324,62 +1380,38 @@
                     <div class="milestone-content">
                         <div class="milestone-date">Month 4</div>
                         <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
-                            special space is a great spot for them to play safely while
-                            their parents do other things. It's filled with toys to keep them entertained and gives
-                            their
-                            parents peace of mind
-                            knowing they are secure.</div>
+                            special space is a great spot for them to play safely while their parents do other things.
+                        </div>
                     </div>
                 </div>
+
+                <!-- New Card: Ameerah going out for ear piercing -->
                 <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-utensils"></i> First Solid Food</div>
+                    <div class="milestone-header"><i class="fas fa-gem"></i> Ameerah's Ear Piercing</div>
                     <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
-                            class="milestone-image">
+                        <img src="assets/prepAm.jpg" alt="Ameerah Ear Piercing" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 6</div>
-                        <div class="milestone-description">Both tried mashed sweet potatoes. Ameerah loved it, while
-                            Armani was a bit more hesitant.</div>
+                        <div class="milestone-date"></div>
+                        <div class="milestone-description">Ameerah's special day getting her ears pierced. She was so
+                            brave and looks beautiful with her new earrings!</div>
                     </div>
                 </div>
+
+                <!-- New Card: Armani going out for ear piercing -->
                 <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-comments"></i> First Words</div>
+                    <div class="milestone-header"><i class="fas fa-gem"></i> Armani's Ear Piercing</div>
                     <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
-                            class="milestone-image">
+                        <img src="assets/prepAr.jpg" alt="Armani Ear Piercing" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 9</div>
-                        <div class="milestone-description">Ameerah said "Mama" first, while Armani's first word was
-                            "Dada". The competition continues!</div>
+                        <div class="milestone-date">Month 10</div>
+                        <div class="milestone-description">Armani's special day getting her ears pierced. She was so
+                            brave and looks beautiful with her new earrings!</div>
                     </div>
                 </div>
-                <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-baby"></i> Crawling</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling"
-                            class="milestone-image">
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-date">Month 8</div>
-                        <div class="milestone-description">Armani started the army crawl first, while Ameerah perfected
-                            the traditional crawl. Now they're everywhere!</div>
-                    </div>
-                </div>
-                <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-walking"></i> First Steps</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
-                            class="milestone-image">
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-date">Month 12</div>
-                        <div class="milestone-description">Ameerah took her first steps just before their birthday, with
-                            Armani following a week later. Walking together now!</div>
-                    </div>
-                </div>
-                <!-- New Video Card 1: Our first word -->
+
+                <!-- Video Card: Our first word -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-video"></i> Our First Word</div>
                     <div class="milestone-video-container">
@@ -1397,7 +1429,8 @@
                             "Mama" and Armani said "Dada". Such precious moments captured on video.</div>
                     </div>
                 </div>
-                <!-- New Video Card 2: Eating food -->
+
+                <!-- Video Card: Eating food -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
                     <div class="milestone-video-container">
@@ -1632,11 +1665,9 @@
         function playVideo(button) {
             const videoContainer = button.parentElement;
             const video = videoContainer.querySelector('.milestone-video');
-
             if (video.paused) {
                 video.play();
                 button.style.display = 'none';
-
                 // When video ends, show the play button again
                 video.onended = function () {
                     button.style.display = 'flex';
@@ -1645,7 +1676,6 @@
                 video.pause();
                 button.style.display = 'flex';
             }
-
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
