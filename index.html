@@ -312,20 +312,13 @@
             border-radius: 10px;
             margin-bottom: 15px;
             box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
-            height: 0;
-            padding-bottom: 75%;
-            /* 4:3 Aspect Ratio */
-            background-color: rgba(255, 255, 255, 0.3);
+            height: 250px;
         }
 
         .protected-image {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            /* Changed from cover to contain */
+            object-fit: cover;
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -402,23 +395,10 @@
             line-height: 1.5;
         }
 
-        .milestone-image-container {
-            position: relative;
-            overflow: hidden;
-            height: 0;
-            padding-bottom: 56.25%;
-            /* 16:9 Aspect Ratio */
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
         .milestone-image {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: contain;
-            /* Changed from cover to contain */
+            height: 200px;
+            object-fit: cover;
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -678,20 +658,13 @@
         .random-photo-container {
             position: relative;
             overflow: hidden;
-            height: 0;
-            padding-bottom: 75%;
-            /* 4:3 Aspect Ratio */
-            background-color: rgba(255, 255, 255, 0.3);
+            height: 220px;
         }
 
         .random-photo {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            /* Changed from cover to contain */
+            object-fit: cover;
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -793,8 +766,7 @@
             }
 
             .random-photo-container {
-                padding-bottom: 75%;
-                /* Maintain aspect ratio on mobile */
+                height: 180px;
             }
 
             .random-photo-caption {
@@ -1114,13 +1086,13 @@
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="./assets/ArmaniEid.jpg" alt="Special Moment 7" class="random-photo">
+                            <img src="assets\ArmaniEid.jpg" alt="Special Moment 7" class="random-photo">
                         </div>
                         <div class="random-photo-caption">First eid kabir</div>
                     </div>
                     <div class="random-photo-card">
                         <div class="random-photo-container">
-                            <img src="./assets/mamaAm.jpg" alt="Special Moment 8" class="random-photo">
+                            <img src="assets\mumAm.jpg" alt="Special Moment 8" class="random-photo">
                         </div>
                         <div class="random-photo-caption">First eid kabir</div>
                     </div>
@@ -1163,10 +1135,8 @@
             <div class="milestone-container">
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-smile"></i> First Smile</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babysmile/600/400.jpg" alt="First Smile"
-                            class="milestone-image">
-                    </div>
+                    <img src="https://picsum.photos/seed/babysmile/600/400.jpg" alt="First Smile"
+                        class="milestone-image">
                     <div class="milestone-content">
                         <div class="milestone-date">Week 6</div>
                         <div class="milestone-description">Both Armani and Ameerah blessed us with their first smiles at
@@ -1175,9 +1145,7 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
-                    <div class="milestone-image-container">
-                        <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
-                    </div>
+                    <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
                     <div class="milestone-content">
                         <div class="milestone-date">Month 4</div>
                         <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
@@ -1190,10 +1158,8 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-utensils"></i> First Solid Food</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
-                            class="milestone-image">
-                    </div>
+                    <img src="https://picsum.photos/seed/babyfood/600/400.jpg" alt="First Solid Food"
+                        class="milestone-image">
                     <div class="milestone-content">
                         <div class="milestone-date">Month 6</div>
                         <div class="milestone-description">Both tried mashed sweet potatoes. Ameerah loved it, while
@@ -1202,10 +1168,8 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-comments"></i> First Words</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
-                            class="milestone-image">
-                    </div>
+                    <img src="https://picsum.photos/seed/babywords/600/400.jpg" alt="First Words"
+                        class="milestone-image">
                     <div class="milestone-content">
                         <div class="milestone-date">Month 9</div>
                         <div class="milestone-description">Ameerah said "Mama" first, while Armani's first word was
@@ -1214,10 +1178,7 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-baby"></i> Crawling</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling"
-                            class="milestone-image">
-                    </div>
+                    <img src="https://picsum.photos/seed/babycrawl/600/400.jpg" alt="Crawling" class="milestone-image">
                     <div class="milestone-content">
                         <div class="milestone-date">Month 8</div>
                         <div class="milestone-description">Armani started the army crawl first, while Ameerah perfected
@@ -1226,10 +1187,8 @@
                 </div>
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-walking"></i> First Steps</div>
-                    <div class="milestone-image-container">
-                        <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
-                            class="milestone-image">
-                    </div>
+                    <img src="https://picsum.photos/seed/babywalk/600/400.jpg" alt="First Steps"
+                        class="milestone-image">
                     <div class="milestone-content">
                         <div class="milestone-date">Month 12</div>
                         <div class="milestone-description">Ameerah took her first steps just before their birthday, with
