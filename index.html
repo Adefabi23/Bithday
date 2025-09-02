@@ -946,6 +946,16 @@
             z-index: 1000;
             pointer-events: none;
         }
+
+        /* Custom class for larger video container */
+        .milestone-video-container-large {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 100%;
+            /* Changed from 56.25% to 100% for larger video */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 
@@ -1316,7 +1326,7 @@
                         <img src="assets/1stSmileAm.jpg" alt="Ameerah's First Smile" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Week 6</div>
+                        <div class="milestone-date"></div>
                         <div class="milestone-description">Ameerah blessed us with her first beautiful smile during a
                             morning cuddle session.</div>
                     </div>
@@ -1329,7 +1339,7 @@
                         <img src="assets/1stSmileAr.jpg" alt="Armani's First Smile" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Week 6</div>
+                        <div class="milestone-date"></div>
                         <div class="milestone-description">Armani blessed us with her first beautiful smile during a
                             morning cuddle session.</div>
                     </div>
@@ -1341,7 +1351,7 @@
                         <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 4</div>
+                        <div class="milestone-date"></div>
                         <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
                             special space is a great spot for them to play safely while their parents do other things.
                         </div>
@@ -1387,16 +1397,16 @@
                         </div>
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 9</div>
+                        <div class="milestone-date"></div>
                         <div class="milestone-description">Our first words were Allahu Akbar! Watch Armani and Ameerah
                             say their first words. Such precious moments captured on video.</div>
                     </div>
                 </div>
 
-                <!-- Video Card: Eating food -->
+                <!-- Video Card: Eating food - Increased size -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
-                    <div class="milestone-video-container">
+                    <div class="milestone-video-container-large">
                         <video class="milestone-video" poster="assets/eatingFood.mp4">
                             <source src="./assets/eatingfood.mp4" type="video/mp4">
                             Your browser does not support the video tag.
