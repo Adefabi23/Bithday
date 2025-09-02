@@ -12,12 +12,12 @@ exports.handler = async (event, context) => {
   // Set up default messages
   const defaultMessages = [
     {
-      author: "Grandpa",
+      author: "Grandma",
       date: "Today",
       content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy! We love you more than words can say!"
     },
     {
-      author: "Grandma",
+      author: "Aunt Sarah",
       date: "Today",
       content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
     }
@@ -28,61 +28,82 @@ exports.handler = async (event, context) => {
     if (process.env.NETLIFY_AUTH_TOKEN && process.env.BIRTHDAY_SITE_ID) {
       console.log('Environment variables found, attempting to fetch from Netlify API');
       
-      const options = {
-        hostname: 'api.netlify.com',
-        port: 443,
-        path: `/api/v1/sites/${process.env.BIRTHDAY_SITE_ID}/forms/birthday-messages/submissions`,
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
-          'Content-Type': 'application/json',
-          'User-Agent': 'Birthday-Site-Function/1.0'
-        }
-      };
+      // Try different API endpoints
+      const apiEndpoints = [
+        `/api/v1/sites/${process.env.BIRTHDAY_SITE_ID}/forms/birthday-messages/submissions`,
+        `/api/v1/sites/${process.env.BIRTHDAY_SITE_ID}/submissions`,
+        `/api/v1/submissions?site_id=${process.env.BIRTHDAY_SITE_ID}&form_name=birthday-messages`
+      ];
+      
+      let data = [];
+      let success = false;
+      
+      for (const endpoint of apiEndpoints) {
+        console.log('Trying endpoint:', endpoint);
+        
+        const options = {
+          hostname: 'api.netlify.com',
+          port: 443,
+          path: endpoint,
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${process.env.NETLIFY_AUTH_TOKEN}`,
+            'Content-Type': 'application/json',
+            'User-Agent': 'Birthday-Site-Function/1.0'
+          }
+        };
 
-      const data = await new Promise((resolve, reject) => {
-        const req = https.request(options, (res) => {
-          let body = '';
-          res.on('data', (chunk) => body += chunk);
-          res.on('end', () => {
-            console.log('API Response status:', res.statusCode);
+        try {
+          data = await new Promise((resolve, reject) => {
+            const req = https.request(options, (res) => {
+              let body = '';
+              res.on('data', (chunk) => body += chunk);
+              res.on('end', () => {
+                console.log('API Response status:', res.statusCode);
+                
+                try {
+                  if (res.statusCode === 200) {
+                    const parsed = JSON.parse(body);
+                    console.log('Successfully parsed response, number of submissions:', Array.isArray(parsed) ? parsed.length : 'Not an array');
+                    resolve(parsed);
+                    success = true;
+                  } else {
+                    console.log('Endpoint returned status:', res.statusCode);
+                    resolve([]);
+                  }
+                } catch (e) {
+                  console.error('Error parsing API response:', e);
+                  resolve([]);
+                }
+              });
+            });
             
-            try {
-              if (res.statusCode === 200) {
-                const parsed = JSON.parse(body);
-                console.log('Successfully parsed response, type:', typeof parsed);
-                resolve(parsed);
-              } else if (res.statusCode === 404) {
-                // 404 means no form submissions found yet
-                console.log('No form submissions found (404), returning default messages');
-                resolve([]);
-              } else {
-                console.error('API returned non-200 status:', res.statusCode);
-                console.error('API response:', body);
-                resolve([]);
-              }
-            } catch (e) {
-              console.error('Error parsing API response:', e);
-              console.error('Response body:', body);
+            req.on('error', (error) => {
+              console.error('API request error:', error);
               resolve([]);
-            }
+            });
+            
+            req.setTimeout(5000, () => {
+              console.error('API request timed out');
+              req.destroy();
+              resolve([]);
+            });
+            
+            req.end();
           });
-        });
-        
-        req.on('error', (error) => {
-          console.error('API request error:', error);
-          resolve([]);
-        });
-        
-        req.setTimeout(10000, () => {
-          console.error('API request timed out');
-          req.destroy();
-          resolve([]);
-        });
-        
-        req.end();
-      });
-
+          
+          // If we got data, break out of the loop
+          if (success) {
+            break;
+          }
+        } catch (error) {
+          console.error('Error with endpoint:', endpoint, error);
+          continue;
+        }
+      }
+      
+      console.log('Processing', data.length, 'submissions');
+      
       // Check if we got valid data
       if (!Array.isArray(data)) {
         console.log('Data is not an array, returning default messages');
@@ -96,8 +117,6 @@ exports.handler = async (event, context) => {
         };
       }
 
-      console.log('Processing', data.length, 'submissions');
-      
       // Transform the submissions to match your expected format
       const messages = data
         .filter(submission => {
@@ -118,6 +137,7 @@ exports.handler = async (event, context) => {
         });
 
       console.log('Valid messages found:', messages.length);
+      console.log('Messages:', JSON.stringify(messages, null, 2));
       
       // If we have valid messages, return them
       if (messages.length > 0) {
