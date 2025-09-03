@@ -486,7 +486,8 @@
             z-index: 3;
         }
 
-        .milestone-video-container:hover .video-controls {
+        .milestone-video-container:hover .video-controls,
+        .milestone-video-container-large:hover .video-controls {
             opacity: 1;
         }
 
@@ -1463,7 +1464,7 @@
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-video"></i> Our First Words</div>
                     <div class="milestone-video-container">
-                        <video class="milestone-video" poster="assets/firstword.mp4">
+                        <video class="milestone-video" id="first-words-video" poster="assets/firstword.jpg">
                             <source src="./assets/firstword.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -1503,7 +1504,7 @@
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
                     <div class="milestone-video-container-large">
-                        <video class="milestone-video" poster="assets/eatingFood.mp4">
+                        <video class="milestone-video" id="eating-food-video" poster="assets/eatingFood.jpg">
                             <source src="./assets/eatingfood.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -1531,8 +1532,9 @@
                         </div>
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-description">This was a beautiful moment we shared while we were eating
-                        </div>
+                        <div class="milestone-description">This was a beautiful moment we shared while we were eating.
+                            Armani and Ameerah trying solid foods for the first time was such a special milestone in
+                            their development!</div>
                     </div>
                 </div>
             </div>
@@ -1591,6 +1593,7 @@
                 document.getElementById(sectionId).classList.add('active');
             });
         });
+
         // Confetti animation 
         function createConfetti(event) {
             const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
@@ -1617,6 +1620,7 @@
                 }, animationDuration * 1000);
             }
         }
+
         // Function to load messages from Netlify
         async function loadMessages() {
             const messagesContainer = document.getElementById('messages-container');
@@ -1651,6 +1655,7 @@
                 });
             }
         }
+
         // Function to add a message to the DOM
         function addMessageToDOM(message) {
             const messagesContainer = document.getElementById('messages-container');
@@ -1674,6 +1679,7 @@
         `;
             messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
         }
+
         // Function to show success message
         function showSuccessMessage() {
             const successMessage = document.getElementById('success-message');
@@ -1684,6 +1690,7 @@
             // Create confetti effect
             createConfetti({ pageY: window.innerHeight / 2 });
         }
+
         // Function to hide success message
         function hideSuccessMessage() {
             const successMessage = document.getElementById('success-message');
@@ -1696,6 +1703,7 @@
                 window.location.href = 'success.html';
             }, 500);
         }
+
         // Function to show error message
         function showErrorMessage(message) {
             // Create error message element if it doesn't exist
@@ -1735,6 +1743,7 @@
                 errorMessage.classList.remove('show');
             }, 5000);
         }
+
         // Function to show loading state
         function showLoadingState(form, isLoading) {
             const submitButton = form.querySelector('.btn-submit');
@@ -1748,6 +1757,7 @@
                 submitButton.style.opacity = '1';
             }
         }
+
         // Function to play videos
         function playVideo(button) {
             const videoContainer = button.parentElement;
@@ -1759,23 +1769,12 @@
                 button.style.display = 'none';
                 playPauseBtn.classList.remove('fa-play');
                 playPauseBtn.classList.add('fa-pause');
-
-                // Update progress bar
-                updateVideoProgress(video);
-
-                // When video ends, show the play button again
-                video.onended = function () {
-                    button.style.display = 'flex';
-                    playPauseBtn.classList.remove('fa-pause');
-                    playPauseBtn.classList.add('fa-play');
-                };
             } else {
                 video.pause();
                 button.style.display = 'flex';
                 playPauseBtn.classList.remove('fa-pause');
                 playPauseBtn.classList.add('fa-play');
             }
-
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
@@ -1798,10 +1797,6 @@
                 icon.classList.add('fa-play');
                 playButton.style.display = 'flex';
             }
-
-            // Update progress bar
-            updateVideoProgress(video);
-
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
@@ -1814,16 +1809,34 @@
 
             // Update progress bar and time display
             video.addEventListener('timeupdate', function () {
-                const percentage = (video.currentTime / video.duration) * 100;
-                progressBar.style.width = percentage + '%';
+                if (video.duration) {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = percentage + '%';
 
-                // Update time display
-                const currentMinutes = Math.floor(video.currentTime / 60);
-                const currentSeconds = Math.floor(video.currentTime % 60);
-                const durationMinutes = Math.floor(video.duration / 60);
-                const durationSeconds = Math.floor(video.duration % 60);
+                    const currentMinutes = Math.floor(video.currentTime / 60);
+                    const currentSeconds = Math.floor(video.currentTime % 60);
+                    const durationMinutes = Math.floor(video.duration / 60);
+                    const durationSeconds = Math.floor(video.duration % 60);
+                    timeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+                }
+            });
 
-                timeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+            // Set up ended event listener
+            video.addEventListener('ended', function () {
+                const playButton = videoContainer.querySelector('.video-play-button');
+                const playPauseBtn = videoContainer.querySelector('.video-play-pause i');
+                playButton.style.display = 'flex';
+                playPauseBtn.classList.remove('fa-pause');
+                playPauseBtn.classList.add('fa-play');
+            });
+
+            // Set up loadedmetadata event to initialize duration
+            video.addEventListener('loadedmetadata', function () {
+                if (video.duration) {
+                    const durationMinutes = Math.floor(video.duration / 60);
+                    const durationSeconds = Math.floor(video.duration % 60);
+                    timeDisplay.textContent = `0:00 / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+                }
             });
         }
 
@@ -1858,7 +1871,6 @@
                 icon.classList.remove('fa-volume-up');
                 icon.classList.add('fa-volume-mute');
             }
-
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
@@ -1870,9 +1882,10 @@
             const volumeButton = videoContainer.querySelector('.volume-button i');
 
             video.volume = slider.value;
+            video.muted = (slider.value === 0);
 
             // Update icon based on volume level
-            if (video.volume === 0) {
+            if (video.muted || video.volume === 0) {
                 volumeButton.classList.remove('fa-volume-up', 'fa-volume-down');
                 volumeButton.classList.add('fa-volume-mute');
             } else if (video.volume < 0.5) {
@@ -1882,7 +1895,6 @@
                 volumeButton.classList.remove('fa-volume-down', 'fa-volume-mute');
                 volumeButton.classList.add('fa-volume-up');
             }
-
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
@@ -1914,7 +1926,6 @@
                 icon.classList.remove('fa-compress');
                 icon.classList.add('fa-expand');
             }
-
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
@@ -1923,8 +1934,15 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Load messages from Netlify
             loadMessages();
+
+            // Initialize all video elements
+            document.querySelectorAll('.milestone-video').forEach(video => {
+                updateVideoProgress(video);
+            });
+
             // Close success message button
             document.getElementById('close-success').addEventListener('click', hideSuccessMessage);
+
             // Handle form submission
             document.getElementById('guestbook-form').addEventListener('submit', function (e) {
                 console.log('Form submitted');
@@ -2003,10 +2021,12 @@
                 }
             });
         });
+
         // Prevent right-click on images 
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', e => e.preventDefault());
         });
+
         // Disable print screen 
         document.addEventListener('keydown', function (e) {
             if (e.key === 'PrintScreen') {
@@ -2014,6 +2034,7 @@
                 alert('Screenshots are disabled on this page.');
             }
         });
+
         // Add watermark overlay to images 
         document.querySelectorAll('.protected-image, .milestone-image, .random-photo').forEach(img => {
             img.addEventListener('load', function () {
@@ -2031,6 +2052,7 @@
                 this.src = canvas.toDataURL('image/jpeg');
             });
         });
+
         // Add mobile-specific optimizations
         if ('ontouchstart' in window) {
             // Add touch feedback for mobile devices
