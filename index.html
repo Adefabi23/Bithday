@@ -389,13 +389,6 @@
             padding: 20px;
         }
 
-        .milestone-date {
-            font-size: 0.9rem;
-            color: #ff85c1;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
         .milestone-description {
             font-size: 1rem;
             line-height: 1.5;
@@ -476,6 +469,89 @@
         .video-play-button i {
             color: white;
             font-size: 24px;
+        }
+
+        /* Enhanced Video Controls */
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+        }
+
+        .milestone-video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        .video-play-pause {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .video-progress {
+            flex-grow: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-progress-bar {
+            height: 100%;
+            background: #ff69b4;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .video-time {
+            color: white;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .video-volume {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .volume-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .volume-slider {
+            width: 50px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .video-fullscreen {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
         }
 
         /* Guestbook Styles */
@@ -934,6 +1010,15 @@
             .milestone-video-container {
                 padding-bottom: 56.25%;
             }
+
+            /* Video controls adjustments for mobile */
+            .video-controls {
+                padding: 8px;
+            }
+
+            .volume-slider {
+                width: 30px;
+            }
         }
 
         /* Watermark */
@@ -1326,12 +1411,10 @@
                         <img src="assets/1stSmileAm.jpg" alt="Ameerah's First Smile" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date"></div>
                         <div class="milestone-description">Ameerah blessed us with her first beautiful smile during a
                             morning cuddle session.</div>
                     </div>
                 </div>
-
                 <!-- First Smile Card for Armani -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-smile"></i> Armani's First Smile</div>
@@ -1339,25 +1422,21 @@
                         <img src="assets/1stSmileAr.jpg" alt="Armani's First Smile" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date"></div>
                         <div class="milestone-description">Armani blessed us with her first beautiful smile during a
                             morning cuddle session.</div>
                     </div>
                 </div>
-
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
                     <div class="milestone-image-container">
                         <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date"></div>
                         <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
                             special space is a great spot for them to play safely while their parents do other things.
                         </div>
                     </div>
                 </div>
-
                 <!-- New Card: Ameerah going out for ear piercing -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-gem"></i> Ameerah's Ear Piercing</div>
@@ -1365,12 +1444,10 @@
                         <img src="assets/prepAm.jpg" alt="Ameerah Ear Piercing" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 10</div>
                         <div class="milestone-description">Ameerah's special day getting her ears pierced. She was so
                             brave and looks beautiful with her new earrings!</div>
                     </div>
                 </div>
-
                 <!-- New Card: Armani going out for ear piercing -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-gem"></i> Armani's Ear Piercing</div>
@@ -1378,15 +1455,13 @@
                         <img src="assets/prepAr.jpg" alt="Armani Ear Piercing" class="milestone-image">
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 10</div>
                         <div class="milestone-description">Armani's special day getting her ears pierced. She was so
                             brave and looks beautiful with her new earrings!</div>
                     </div>
                 </div>
-
                 <!-- Video Card: Our first word -->
                 <div class="milestone-card" onclick="createConfetti(event)">
-                    <div class="milestone-header"><i class="fas fa-video"></i> Our First Word</div>
+                    <div class="milestone-header"><i class="fas fa-video"></i> Our First Words</div>
                     <div class="milestone-video-container">
                         <video class="milestone-video" poster="assets/firstword.mp4">
                             <source src="./assets/firstword.mp4" type="video/mp4">
@@ -1395,14 +1470,35 @@
                         <div class="video-play-button" onclick="playVideo(this)">
                             <i class="fas fa-play"></i>
                         </div>
+                        <div class="video-controls">
+                            <button class="video-play-pause" onclick="togglePlayPause(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-progress" onclick="setVideoProgress(this, event)">
+                                <div class="video-progress-bar"></div>
+                            </div>
+                            <span class="video-time">0:00 / 0:00</span>
+                            <div class="video-volume">
+                                <button class="volume-button" onclick="toggleMute(this)">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1"
+                                    onchange="setVolume(this)">
+                            </div>
+                            <button class="video-fullscreen" onclick="toggleFullscreen(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date"></div>
-                        <div class="milestone-description">Our first words were Allahu Akbar! Watch Armani and Ameerah
-                            say their first words. Such precious moments captured on video.</div>
+                        <div class="milestone-description">The magical moment when Armani and Ameerah spoke their first
+                            words!
+                            Hearing them say "Allahu Akbar" filled our hearts with immense joy and pride. This precious
+                            milestone
+                            marks the beginning of their beautiful journey of speech and communication. A memory we'll
+                            cherish forever!</div>
                     </div>
                 </div>
-
                 <!-- Video Card: Eating food - Increased size -->
                 <div class="milestone-card" onclick="createConfetti(event)">
                     <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
@@ -1414,9 +1510,27 @@
                         <div class="video-play-button" onclick="playVideo(this)">
                             <i class="fas fa-play"></i>
                         </div>
+                        <div class="video-controls">
+                            <button class="video-play-pause" onclick="togglePlayPause(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-progress" onclick="setVideoProgress(this, event)">
+                                <div class="video-progress-bar"></div>
+                            </div>
+                            <span class="video-time">0:00 / 0:00</span>
+                            <div class="video-volume">
+                                <button class="volume-button" onclick="toggleMute(this)">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1"
+                                    onchange="setVolume(this)">
+                            </div>
+                            <button class="video-fullscreen" onclick="toggleFullscreen(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="milestone-content">
-                        <div class="milestone-date">Month 6</div>
                         <div class="milestone-description">This was a beautiful moment we shared while we were eating
                         </div>
                     </div>
@@ -1638,20 +1752,173 @@
         function playVideo(button) {
             const videoContainer = button.parentElement;
             const video = videoContainer.querySelector('.milestone-video');
+            const playPauseBtn = videoContainer.querySelector('.video-play-pause i');
+
             if (video.paused) {
                 video.play();
                 button.style.display = 'none';
+                playPauseBtn.classList.remove('fa-play');
+                playPauseBtn.classList.add('fa-pause');
+
+                // Update progress bar
+                updateVideoProgress(video);
+
                 // When video ends, show the play button again
                 video.onended = function () {
                     button.style.display = 'flex';
+                    playPauseBtn.classList.remove('fa-pause');
+                    playPauseBtn.classList.add('fa-play');
                 };
             } else {
                 video.pause();
                 button.style.display = 'flex';
+                playPauseBtn.classList.remove('fa-pause');
+                playPauseBtn.classList.add('fa-play');
             }
+
             // Prevent triggering the card's click event
             event.stopPropagation();
         }
+
+        // Function to toggle play/pause
+        function togglePlayPause(button) {
+            const videoContainer = button.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const playButton = videoContainer.querySelector('.video-play-button');
+            const icon = button.querySelector('i');
+
+            if (video.paused) {
+                video.play();
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                playButton.style.display = 'none';
+            } else {
+                video.pause();
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                playButton.style.display = 'flex';
+            }
+
+            // Update progress bar
+            updateVideoProgress(video);
+
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+
+        // Function to update video progress
+        function updateVideoProgress(video) {
+            const videoContainer = video.closest('.milestone-video-container, .milestone-video-container-large');
+            const progressBar = videoContainer.querySelector('.video-progress-bar');
+            const timeDisplay = videoContainer.querySelector('.video-time');
+
+            // Update progress bar and time display
+            video.addEventListener('timeupdate', function () {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = percentage + '%';
+
+                // Update time display
+                const currentMinutes = Math.floor(video.currentTime / 60);
+                const currentSeconds = Math.floor(video.currentTime % 60);
+                const durationMinutes = Math.floor(video.duration / 60);
+                const durationSeconds = Math.floor(video.duration % 60);
+
+                timeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+            });
+        }
+
+        // Function to set video progress
+        function setVideoProgress(progressBar, event) {
+            const videoContainer = progressBar.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const progressContainer = videoContainer.querySelector('.video-progress');
+
+            // Calculate click position
+            const clickPosition = (event.clientX - progressContainer.getBoundingClientRect().left) / progressContainer.offsetWidth;
+            video.currentTime = clickPosition * video.duration;
+
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+
+        // Function to toggle mute
+        function toggleMute(button) {
+            const videoContainer = button.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const volumeSlider = videoContainer.querySelector('.volume-slider');
+            const icon = button.querySelector('i');
+
+            if (video.muted) {
+                video.muted = false;
+                volumeSlider.value = video.volume;
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-volume-up');
+            } else {
+                video.muted = true;
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-mute');
+            }
+
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+
+        // Function to set volume
+        function setVolume(slider) {
+            const videoContainer = slider.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const volumeButton = videoContainer.querySelector('.volume-button i');
+
+            video.volume = slider.value;
+
+            // Update icon based on volume level
+            if (video.volume === 0) {
+                volumeButton.classList.remove('fa-volume-up', 'fa-volume-down');
+                volumeButton.classList.add('fa-volume-mute');
+            } else if (video.volume < 0.5) {
+                volumeButton.classList.remove('fa-volume-up', 'fa-volume-mute');
+                volumeButton.classList.add('fa-volume-down');
+            } else {
+                volumeButton.classList.remove('fa-volume-down', 'fa-volume-mute');
+                volumeButton.classList.add('fa-volume-up');
+            }
+
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+
+        // Function to toggle fullscreen
+        function toggleFullscreen(button) {
+            const videoContainer = button.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const icon = button.querySelector('i');
+
+            if (!document.fullscreenElement) {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.webkitRequestFullscreen) { /* Safari */
+                    videoContainer.webkitRequestFullscreen();
+                } else if (videoContainer.msRequestFullscreen) { /* IE11 */
+                    videoContainer.msRequestFullscreen();
+                }
+                icon.classList.remove('fa-expand');
+                icon.classList.add('fa-compress');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+                icon.classList.remove('fa-compress');
+                icon.classList.add('fa-expand');
+            }
+
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+
         // Initialize the page when DOM is loaded
         document.addEventListener('DOMContentLoaded', function () {
             // Load messages from Netlify
