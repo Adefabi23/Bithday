@@ -1,67 +1,333 @@
-<script>
-    // Create confetti effect on page load
-    window.addEventListener('load', function () {
-        createConfetti();
-        setupBackButton();
+<!DOCTYPE html>
+<html lang="en">
 
-        // We don't want to redirect immediately from the success page
-        // All users should see the success page after form submission
-        // The redirection will happen only when they click the "Back" button
-    });
-
-    function createConfetti() {
-        const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
-        for (let i = 0; i < 100; i++) {
-            setTimeout(() => {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                // Random properties
-                const size = Math.random() * 10 + 5;
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const left = Math.random() * 100;
-                const animationDuration = Math.random() * 3 + 2;
-                const opacity = Math.random() * 0.5 + 0.5;
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-                confetti.style.backgroundColor = color;
-                confetti.style.left = `${left}%`;
-                confetti.style.top = `-20px`;
-                confetti.style.opacity = opacity;
-                confetti.style.animationDuration = `${animationDuration}s`;
-                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                document.body.appendChild(confetti);
-                // Remove confetti after animation completes
-                setTimeout(() => {
-                    confetti.remove();
-                }, animationDuration * 1000);
-            }, i * 30);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! - Armani & Ameerah's First Year</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
         }
-    }
 
-    function setupBackButton() {
-        const backButton = document.getElementById('back-button');
-        backButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            console.log('Back button clicked');
-            console.log('isOwner:', localStorage.getItem('isOwner'));
-            console.log('hasAccessed:', localStorage.getItem('hasAccessed'));
+        body {
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-            // Check if the user is the owner
-            if (localStorage.getItem('isOwner') === 'true') {
-                console.log('Owner access granted - redirecting to main site');
-                // Owner can go back to the main site
-                window.location.href = 'index.html';
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 30% 70%, rgba(255, 218, 224, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        .success-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            // For all other users (including first-time visitors), redirect to expired page
-            else {
-                console.log('Redirecting to expired page');
-                // Set access flag if not already set
-                if (localStorage.getItem('hasAccessed') !== 'true') {
-                    localStorage.setItem('hasAccessed', 'true');
-                }
-                // Redirect to expired page
-                window.location.href = 'expired.html';
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
+
+        .success-card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 25px;
+            padding: 50px 30px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #ff69b4, #ff85c1, #ffb6c1);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+        }
+
+        .success-message {
+            font-size: 1.5rem;
+            color: #ff85c1;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .baby-decoration {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .baby-icon {
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.6);
+            margin: 0 15px;
+            animation: float 3s infinite alternate ease-in-out;
+        }
+
+        .baby-icon:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .baby-icon:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-15px);
+            }
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 15px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .back-button:hover::before {
+            transform: translateX(0);
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #ff69b4;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .footer i {
+            margin-right: 8px;
+            color: #ff85c1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .success-message {
+                font-size: 1.2rem;
+            }
+
+            .success-card {
+                padding: 40px 20px;
+            }
+
+            .baby-icon {
+                font-size: 1.5rem;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-container">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Thank You!</h1>
+            <p class="success-message">Your form submission has been received.</p>
+            <p>We appreciate your birthday message for Armani & Ameerah!</p>
+            <div class="baby-decoration">
+                <div class="baby-icon"><i class="fas fa-baby"></i></div>
+                <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
+                <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
+            </div>
+            <a href="#" id="back-button" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to our site
+            </a>
+        </div>
+        <div class="footer">
+            <i class="fas fa-heart"></i> Armani & Ameerah's First Year <i class="fas fa-heart"></i>
+        </div>
+    </div>
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Create confetti effect
+            createConfetti();
+
+            // Setup back button functionality
+            setupBackButton();
         });
-    }
-</script>
+
+        function createConfetti() {
+            const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
+
+            // Create 100 confetti pieces
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+
+                    // Random properties
+                    const size = Math.random() * 10 + 5;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * 100;
+                    const animationDuration = Math.random() * 3 + 2;
+                    const opacity = Math.random() * 0.5 + 0.5;
+
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = `${left}%`;
+                    confetti.style.top = `-20px`;
+                    confetti.style.opacity = opacity;
+                    confetti.style.animationDuration = `${animationDuration}s`;
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+
+                    document.body.appendChild(confetti);
+
+                    // Remove confetti after animation completes
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, animationDuration * 1000);
+                }, i * 30);
+            }
+        }
+
+        function setupBackButton() {
+            const backButton = document.getElementById('back-button');
+
+            backButton.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Check if the user is the owner
+                if (localStorage.getItem('isOwner') === 'true') {
+                    // Owner can go back to the main site
+                    window.location.href = 'index.html';
+                } else {
+                    // For all other users, set access flag and redirect to expired page
+                    localStorage.setItem('hasAccessed', 'true');
+                    window.location.href = 'expired.html';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
