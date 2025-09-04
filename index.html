@@ -1,19 +1,2058 @@
-Set-Content -Path "index.html" -Value @"
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        window.location.href = 'access.html';
+    <title>Armani & Ameerah's First Year</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            color: #555;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(255, 192, 203, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 30% 70%, rgba(255, 218, 224, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 80% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .header-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .rattle {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .rattle:nth-child(1) {
+            top: 10px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .rattle:nth-child(2) {
+            top: 20px;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .rattle:nth-child(3) {
+            bottom: 10px;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .rattle:nth-child(4) {
+            bottom: 20px;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #ff69b4;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ff85c1;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-tab {
+            padding: 12px 25px;
+            margin: 0 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #ff69b4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            border-radius: 50px;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-tab.active {
+            color: white;
+        }
+
+        .nav-tab.active::before {
+            transform: scale(1);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline Gallery Styles */
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff69b4, #ffb6c1);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-month {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .month-label {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .timeline-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            width: 30%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 20px;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        /* Positioning for 3 cards */
+        .timeline-item:nth-child(1) {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(2) {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(3) {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3);
+        }
+
+        /* Positioning for timeline dots */
+        .timeline-item:nth-child(1)::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(2)::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item:nth-child(3)::before {
+            left: -60px;
+        }
+
+        .baby-name {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .baby-name i {
+            margin-right: 8px;
+            color: #ff85c1;
+        }
+
+        .media-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.3);
+            height: 0;
+            padding-bottom: 100%;
+            /* Increased from 75% to 100% for larger images */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .protected-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            transition: transform 0.5s ease;
+        }
+
+        .timeline-item:hover .protected-image {
+            transform: scale(1.05);
+        }
+
+        .media-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        /* Growth Tracker Styles */
+        .milestone-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .milestone-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .milestone-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        .milestone-header {
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .milestone-header i {
+            margin-right: 8px;
+        }
+
+        .milestone-content {
+            padding: 20px;
+        }
+
+        .milestone-description {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .milestone-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 100%;
+            /* Increased from 56.25% to 100% for larger images */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .milestone-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            transition: transform 0.5s ease;
+        }
+
+        .milestone-card:hover .milestone-image {
+            transform: scale(1.05);
+        }
+
+        /* Video Container Styles */
+        .milestone-video-container {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .milestone-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 105, 180, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .video-play-button:hover {
+            background: rgba(255, 105, 180, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-play-button i {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Enhanced Video Controls */
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+        }
+
+        .milestone-video-container:hover .video-controls,
+        .milestone-video-container-large:hover .video-controls {
+            opacity: 1;
+        }
+
+        .video-play-pause {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .video-progress {
+            flex-grow: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-progress-bar {
+            height: 100%;
+            background: #ff69b4;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .video-time {
+            color: white;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .video-volume {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .volume-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .volume-slider {
+            width: 50px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .video-fullscreen {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* Guestbook Styles */
+        .guestbook-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .guestbook-form {
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ff69b4;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffe0f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff69b4;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+        }
+
+        .messages-container {
+            margin-top: 40px;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff69b4;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .message-card:hover {
+            transform: translateX(5px);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .message-author {
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .message-date {
+            font-size: 0.85rem;
+            color: #ff85c1;
+        }
+
+        .message-content {
+            line-height: 1.5;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff69b4;
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Baby Footers */
+        .baby-footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .baby-icon {
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.5);
+            animation: bounce 2s infinite alternate;
+        }
+
+        .baby-icon:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .baby-icon:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Credit Footer */
+        .credit-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #ff69b4;
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(255, 182, 193, 0.2);
+        }
+
+        .credit-footer i {
+            margin-right: 8px;
+            color: #ff85c1;
+        }
+
+        /* Success Message - Enhanced */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #ff69b4;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 105, 180, 0.2);
+            max-width: 90%;
+            width: 400px;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-message i {
+            font-size: 50px;
+            color: #ff69b4;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .success-message h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ff69b4;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #ff85c1;
+        }
+
+        .success-message .btn-close {
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
+
+        .success-message .btn-close:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
+        }
+
+        /* Overlay for success message */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Random Photos Section - Enhanced Styles */
+        .random-photos {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .random-photos h2 {
+            color: #ff69b4;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .random-photos h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+        }
+
+        .random-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+
+        .random-photo-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .random-photo-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        .random-photo-container {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 100%;
+            /* Increased from 75% to 100% for larger images */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .random-photo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+            transition: transform 0.5s ease;
+        }
+
+        .random-photo-card:hover .random-photo {
+            transform: scale(1.05);
+        }
+
+        .random-photo-caption {
+            padding: 18px;
+            font-weight: 600;
+            color: #ff69b4;
+            font-size: 1.1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .random-photo-caption::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: #ff69b4;
+            border-radius: 2px;
+        }
+
+        /* Add decorative elements to cards */
+        .random-photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff69b4, #ff85c1, #ffb6c1);
+            z-index: 1;
+        }
+
+        /* Add a subtle shine effect on hover */
+        .random-photo-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            transform: rotate(30deg);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .random-photo-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .timeline-item {
+                width: 90%;
+                margin-bottom: 30px;
+            }
+
+            .timeline-item::before {
+                left: -50px !important;
+            }
+
+            .milestone-container {
+                grid-template-columns: 1fr;
+            }
+
+            .random-photos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .random-photo-container {
+                padding-bottom: 100%;
+                /* Maintain larger aspect ratio on mobile */
+            }
+
+            .random-photo-caption {
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            .success-message {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .success-message h3 {
+                font-size: 1.5rem;
+            }
+
+            /* Keep larger images on mobile */
+            .media-container {
+                padding-bottom: 100%;
+            }
+
+            .milestone-image-container {
+                padding-bottom: 100%;
+                /* Maintain larger aspect ratio on mobile */
+            }
+
+            .milestone-video-container {
+                padding-bottom: 56.25%;
+            }
+
+            /* Video controls adjustments for mobile */
+            .video-controls {
+                padding: 8px;
+            }
+
+            .volume-slider {
+                width: 30px;
+            }
+        }
+
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: rgba(255, 105, 180, 0.5);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        /* Custom class for larger video container */
+        .milestone-video-container-large {
+            position: relative;
+            overflow: hidden;
+            height: 0;
+            padding-bottom: 100%;
+            /* Changed from 56.25% to 100% for larger video */
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    <!-- Access Control Script -->
+        <script>
+        // If URL has owner parameter, set owner flag
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('owner') === 'true') {
+            localStorage.setItem('isOwner', 'true');
+        }
+
+        // If the user is the owner, allow access
+        if (localStorage.getItem('isOwner') === 'true') {
+            // Continue to load the page
+        } 
+        // If the user has accessed before and is not the owner, redirect to expired
+        else if (localStorage.getItem('hasAccessed') === 'true') {
+            window.location.href = 'expired.html';
+        }
+        // Otherwise, it's the first time for a regular user, set the flag
+        else {
+            localStorage.setItem('hasAccessed', 'true');
+        }
     </script>
 </head>
 
 <body>
-    <p>Redirecting to access page...</p>
+    <div class="container">
+        <header>
+            <div class="header-decoration">
+                <div class="rattle"><i class="fas fa-baby"></i></div>
+                <div class="rattle"><i class="fas fa-baby-carriage"></i></div>
+                <div class="rattle"><i class="fas fa-bottle-baby"></i></div>
+                <div class="rattle"><i class="fas fa-baby"></i></div>
+            </div>
+            <h1>Armani & Ameerah</h1>
+            <p class="subtitle">Celebrating Our First Year</p>
+            <div class="nav-tabs">
+                <div class="nav-tab active" data-section="gallery">Gallery</div>
+                <div class="nav-tab" data-section="milestones">Growth Tracker</div>
+                <div class="nav-tab" data-section="guestbook">Guestbook</div>
+            </div>
+        </header>
+        <!-- Gallery Section -->
+        <section id="gallery" class="content-section active">
+            <div class="timeline">
+                <!-- Month 1 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/month1.jpg" alt="Armani Month 1" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>1 month of sweetness</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/1month.jpg" alt="Both Twins Month 1" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Our first month together</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 2 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/2months.jpg" alt="Both Twins Month 2" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Double the fun at 2 months</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 3 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/3months.jpg" alt="Both Twins Month 3" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Three months of twin adventures</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 4 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="./assets/4monthAr.jpg" alt="Armani Month 4" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Four Months of Fun!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="./assets/4monthAm.jpg" alt="Ameerah Month 4" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Four Months of wonder!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 5 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 5</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="./assets/5monthAr.jpg" alt="Armani Month 5" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>5 months look good on me</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="./assets/5monthAm.jpg" alt="Ameerah Month 5" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>5 months look good on me</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 6 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 6</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="./assets/6monthsAr.jpg" alt="Armani Month 6" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>6 months of milestones</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/6months.jpg" alt="Both Twins Month 6" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>We are half a year old!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 7 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 7</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="./assets/7monthsAr.jpg" alt="Armani Month 7" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>7 months of exploration</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="./assets/7monthAm.jpg" alt="Ameerah Month 7" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>7 months of playfulness</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/7months.jpg" alt="Both Twins Month 7" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Seven months of twin magic</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 8 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 8</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/8months.jpg" alt="Both Twins Month 8" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Eight months of growing together</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 9 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 9</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/9months.jpg" alt="Both Twins Month 9" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Nine months of twin connection</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 10 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 10</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="./assets/10months.jpg" alt="Both Twins Month 10" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Ten months of double the joy</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 11 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 11</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="assets/11months.jpg" alt="Both Twins Month 11" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Eleven months of twin love</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Month 12 -->
+                <div class="timeline-month">
+                    <div class="month-label">Month 12</div>
+                    <div class="timeline-content">
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/armanibaby12/600/400.jpg" alt="Armani Month 12"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First birthday celebration</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/ameerahbaby12/600/400.jpg" alt="Ameerah Month 12"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Taking first steps</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/twinstogether12/600/400.jpg"
+                                    alt="Both Twins Month 12" class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First birthday party</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Random Photos Section -->
+            <div class="random-photos">
+                <h2>Special Moments</h2>
+                <div class="random-photos-grid">
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/family.jpg" alt="Special Moment 1" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First portrait with Mom and Grandies</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/doublecuteness.jpg" alt="Special Moment 2" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Double the Cuteness</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/amdadb.jpg" alt="Special Moment 3" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Ameerah on Dad's Birthday</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/ardadab.jpg" alt="Special Moment 4" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Armani on Dad's Birthday</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/dadaB.jpg" alt="Special Moment 5" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Still on Dad's Cake Day</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/Eid fitr.jpg" alt="Special Moment 6" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First Eid Fitr!</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/ArmaniEid.jpg" alt="Special Moment 7" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First eid kabir</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="./assets/mumAm.jpg" alt="Special Moment 8" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">First eid kabir</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/outing.jpg" alt="Special Moment 9" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Birthday Outing with nana</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/mumGr.jpg" alt="Special Moment 10" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Mummy's graduation day</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/mamaAm.jpg" alt="Special Moment 11" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Mummy and Armani just waking up</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/tryGlaAR.jpg" alt="Special Moment 12" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Try out glasses</div>
+                    </div>
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/tryGlaAM.jpg" alt="Special Moment 13" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Try out glasses</div>
+                    </div>
+                    <!-- New Picture Card 1: Naming day with daddy and mum -->
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/mumetdadaNamin.jpg" alt="Naming day with daddy and mum"
+                                class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">Naming day with daddy and mum</div>
+                    </div>
+                    <!-- New Picture Card 2: About to come to the world -->
+                    <div class="random-photo-card">
+                        <div class="random-photo-container">
+                            <img src="assets/aboutto.jpg" alt="About to come to the world" class="random-photo">
+                        </div>
+                        <div class="random-photo-caption">About to come to the world</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Milestones Section -->
+        <section id="milestones" class="content-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Growth Tracker</h2>
+            <div class="milestone-container">
+                <!-- First Smile Card for Ameerah -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-smile"></i> Ameerah's First Smile</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/1stSmileAm.jpg" alt="Ameerah's First Smile" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">Ameerah blessed us with her first beautiful smile during a
+                            morning cuddle session.</div>
+                    </div>
+                </div>
+                <!-- First Smile Card for Armani -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-smile"></i> Armani's First Smile</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/1stSmileAr.jpg" alt="Armani's First Smile" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">Armani blessed us with her first beautiful smile during a
+                            morning cuddle session.</div>
+                    </div>
+                </div>
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-sync-alt"></i> Checking Out Our Play Pen</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/Checking.jpg" alt="Rolling Over" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">Armani and Ameerah are checking out their new play pen. This
+                            special space is a great spot for them to play safely while their parents do other things.
+                        </div>
+                    </div>
+                </div>
+                <!-- New Card: Ameerah going out for ear piercing -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-gem"></i> Ameerah's Ear Piercing</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/prepAm.jpg" alt="Ameerah Ear Piercing" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">Ameerah's special day getting her ears pierced. She was so
+                            brave and looks beautiful with her new earrings!</div>
+                    </div>
+                </div>
+                <!-- New Card: Armani going out for ear piercing -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-gem"></i> Armani's Ear Piercing</div>
+                    <div class="milestone-image-container">
+                        <img src="assets/prepAr.jpg" alt="Armani Ear Piercing" class="milestone-image">
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">Armani's special day getting her ears pierced. She was so
+                            brave and looks beautiful with her new earrings!</div>
+                    </div>
+                </div>
+                <!-- Video Card: Our first word -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-video"></i> Our First Words</div>
+                    <div class="milestone-video-container">
+                        <video class="milestone-video" id="first-words-video" poster="assets/firstword.jpg">
+                            <source src="./assets/firstword.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-play-button" onclick="playVideo(this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-controls">
+                            <button class="video-play-pause" onclick="togglePlayPause(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-progress" onclick="setVideoProgress(this, event)">
+                                <div class="video-progress-bar"></div>
+                            </div>
+                            <span class="video-time">0:00 / 0:00</span>
+                            <div class="video-volume">
+                                <button class="volume-button" onclick="toggleMute(this)">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1"
+                                    onchange="setVolume(this)">
+                            </div>
+                            <button class="video-fullscreen" onclick="toggleFullscreen(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">The magical moment when Armani and Ameerah spoke their first
+                            words!
+                            Hearing them say "Allahu Akbar" filled our hearts with immense joy and pride. This precious
+                            milestone
+                            marks the beginning of their beautiful journey of speech and communication. A memory we'll
+                            cherish forever!</div>
+                    </div>
+                </div>
+                <!-- Video Card: Eating food - Increased size -->
+                <div class="milestone-card" onclick="createConfetti(event)">
+                    <div class="milestone-header"><i class="fas fa-video"></i> Eating Food</div>
+                    <div class="milestone-video-container-large">
+                        <video class="milestone-video" id="eating-food-video" poster="assets/eatingFood.jpg">
+                            <source src="./assets/eatingfood.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-play-button" onclick="playVideo(this)">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-controls">
+                            <button class="video-play-pause" onclick="togglePlayPause(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <div class="video-progress" onclick="setVideoProgress(this, event)">
+                                <div class="video-progress-bar"></div>
+                            </div>
+                            <span class="video-time">0:00 / 0:00</span>
+                            <div class="video-volume">
+                                <button class="volume-button" onclick="toggleMute(this)">
+                                    <i class="fas fa-volume-up"></i>
+                                </button>
+                                <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1"
+                                    onchange="setVolume(this)">
+                            </div>
+                            <button class="video-fullscreen" onclick="toggleFullscreen(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="milestone-content">
+                        <div class="milestone-description">This was a beautiful moment we shared while we were eating.
+                            Armani and Ameerah trying solid foods for the first time was such a special milestone in
+                            their development!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Guestbook Section -->
+        <section id="guestbook" class="content-section">
+            <div class="guestbook-container">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #ff69b4;">Birthday Messages</h2>
+                <form name="birthday-messages" method="POST" data-netlify="true" class="guestbook-form"
+                    id="guestbook-form" action="success.html">
+                    <input type="hidden" name="form-name" value="birthday-messages">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Birthday Message</label>
+                        <textarea id="message" name="message"
+                            placeholder="Leave a birthday message for Armani and Ameerah..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Post Message</button>
+                </form>
+                <div class="messages-container" id="messages-container">
+                    <!-- Messages will be loaded here -->
+                </div>
+            </div>
+        </section>
+        <div class="baby-footer">
+            <div class="baby-icon"><i class="fas fa-baby"></i></div>
+            <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
+            <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
+        </div>
+        <div class="credit-footer">
+            <i class="fas fa-heart"></i> Courtesy of Adefabi Junaid (Uncle Jay) <i class="fas fa-heart"></i>
+        </div>
+    </div>
+    <div class="watermark">© Armani & Ameerah's First Year</div>
+    <!-- Overlay and Success Message -->
+    <div class="overlay" id="overlay"></div>
+    <div class="success-message" id="success-message">
+        <i class="fas fa-check-circle"></i>
+        <h3>Thank You!</h3>
+        <p>Your message has been saved successfully!</p>
+        <button class="btn-close" id="close-success">Continue</button>
+    </div>
+    <script>
+        // Navigation tabs functionality 
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections 
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                // Add active class to clicked tab and corresponding section 
+                tab.classList.add('active');
+                const sectionId = tab.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+        // Confetti animation 
+        function createConfetti(event) {
+            const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                // Random properties 
+                const size = Math.random() * 10 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 3 + 2;
+                const opacity = Math.random() * 0.5 + 0.5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${left}%`;
+                confetti.style.top = `${event.pageY - window.scrollY}px`;
+                confetti.style.opacity = opacity;
+                confetti.style.animationDuration = `${animationDuration}s`;
+                document.body.appendChild(confetti);
+                // Remove confetti after animation completes 
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+        // Function to load messages from Netlify
+        async function loadMessages() {
+            const messagesContainer = document.getElementById('messages-container');
+            messagesContainer.innerHTML = '';
+            try {
+                const response = await fetch('/api/messages');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const messages = await response.json();
+                // Display messages
+                messages.forEach(message => {
+                    addMessageToDOM(message);
+                });
+            } catch (error) {
+                console.error('Error loading messages:', error);
+                // Show default messages as fallback
+                const defaultMessages = [
+                    {
+                        author: "Grandma",
+                        date: "Today",
+                        content: "Happy first birthday to our precious grandchildren! Watching you both grow this year has been the greatest joy! We love you more than words can say!"
+                    },
+                    {
+                        author: "Aunt Sarah",
+                        date: "Today",
+                        content: "Happy birthday to the two most adorable twins! Armani and Ameerah, you bring so much happiness to our family. Can't wait to celebrate with you!"
+                    }
+                ];
+                defaultMessages.forEach(message => {
+                    addMessageToDOM(message);
+                });
+            }
+        }
+        // Function to add a message to the DOM
+        function addMessageToDOM(message) {
+            const messagesContainer = document.getElementById('messages-container');
+            const messageCard = document.createElement('div');
+            messageCard.classList.add('message-card');
+            // Sanitize content to prevent XSS
+            const sanitizedContent = message.content
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+            messageCard.innerHTML = ` 
+            <div class="message-header"> 
+                <span class="message-author">${message.author || 'Anonymous'}</span> 
+                <span class="message-date">${message.date || 'Today'}</span> 
+            </div> 
+            <div class="message-content"> 
+                ${sanitizedContent} 
+            </div> 
+        `;
+            messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
+        }
+        // Function to show success message
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('success-message');
+            const overlay = document.getElementById('overlay');
+            // Show overlay and success message
+            overlay.classList.add('show');
+            successMessage.classList.add('show');
+            // Create confetti effect
+            createConfetti({ pageY: window.innerHeight / 2 });
+        }
+        // Function to hide success message
+        function hideSuccessMessage() {
+            const successMessage = document.getElementById('success-message');
+            const overlay = document.getElementById('overlay');
+            // Hide overlay and success message
+            overlay.classList.remove('show');
+            successMessage.classList.remove('show');
+            // Redirect to success page after closing
+            setTimeout(() => {
+                window.location.href = 'success.html';
+            }, 500);
+        }
+        // Function to show error message
+        function showErrorMessage(message) {
+            // Create error message element if it doesn't exist
+            let errorMessage = document.getElementById('error-message');
+            if (!errorMessage) {
+                errorMessage = document.createElement('div');
+                errorMessage.id = 'error-message';
+                errorMessage.className = 'error-message';
+                errorMessage.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #ff6b6b;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+                z-index: 1000;
+                transform: translateX(120%);
+                transition: transform 0.5s ease;
+                font-weight: 600;
+                max-width: 300px;
+            `;
+                document.body.appendChild(errorMessage);
+            }
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            // Add show class styles
+            const style = document.createElement('style');
+            style.textContent = `
+            .error-message.show {
+                transform: translateX(0);
+            }
+        `;
+            document.head.appendChild(style);
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+        // Function to show loading state
+        function showLoadingState(form, isLoading) {
+            const submitButton = form.querySelector('.btn-submit');
+            if (isLoading) {
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+                submitButton.style.opacity = '0.7';
+            } else {
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Post Message';
+                submitButton.style.opacity = '1';
+            }
+        }
+        // Function to play videos
+        function playVideo(button) {
+            const videoContainer = button.parentElement;
+            const video = videoContainer.querySelector('.milestone-video');
+            const playPauseBtn = videoContainer.querySelector('.video-play-pause i');
+            if (video.paused) {
+                video.play();
+                button.style.display = 'none';
+                playPauseBtn.classList.remove('fa-play');
+                playPauseBtn.classList.add('fa-pause');
+            } else {
+                video.pause();
+                button.style.display = 'flex';
+                playPauseBtn.classList.remove('fa-pause');
+                playPauseBtn.classList.add('fa-play');
+            }
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+        // Function to toggle play/pause
+        function togglePlayPause(button) {
+            const videoContainer = button.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const playButton = videoContainer.querySelector('.video-play-button');
+            const icon = button.querySelector('i');
+            if (video.paused) {
+                video.play();
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+                playButton.style.display = 'none';
+            } else {
+                video.pause();
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+                playButton.style.display = 'flex';
+            }
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+        // Function to update video progress
+        function updateVideoProgress(video) {
+            const videoContainer = video.closest('.milestone-video-container, .milestone-video-container-large');
+            const progressBar = videoContainer.querySelector('.video-progress-bar');
+            const timeDisplay = videoContainer.querySelector('.video-time');
+            // Update progress bar and time display
+            video.addEventListener('timeupdate', function () {
+                if (video.duration) {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = percentage + '%';
+                    const currentMinutes = Math.floor(video.currentTime / 60);
+                    const currentSeconds = Math.floor(video.currentTime % 60);
+                    const durationMinutes = Math.floor(video.duration / 60);
+                    const durationSeconds = Math.floor(video.duration % 60);
+                    timeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds} / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+                }
+            });
+            // Set up ended event listener
+            video.addEventListener('ended', function () {
+                const playButton = videoContainer.querySelector('.video-play-button');
+                const playPauseBtn = videoContainer.querySelector('.video-play-pause i');
+                playButton.style.display = 'flex';
+                playPauseBtn.classList.remove('fa-pause');
+                playPauseBtn.classList.add('fa-play');
+            });
+            // Set up loadedmetadata event to initialize duration
+            video.addEventListener('loadedmetadata', function () {
+                if (video.duration) {
+                    const durationMinutes = Math.floor(video.duration / 60);
+                    const durationSeconds = Math.floor(video.duration % 60);
+                    timeDisplay.textContent = `0:00 / ${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+                }
+            });
+        }
+        // Function to set video progress
+        function setVideoProgress(progressBar, event) {
+            const videoContainer = progressBar.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const progressContainer = videoContainer.querySelector('.video-progress');
+            // Calculate click position
+            const clickPosition = (event.clientX - progressContainer.getBoundingClientRect().left) / progressContainer.offsetWidth;
+            video.currentTime = clickPosition * video.duration;
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+        // Function to toggle mute
+        function toggleMute(button) {
+            const videoContainer = button.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const volumeSlider = videoContainer.querySelector('.volume-slider');
+            const icon = button.querySelector('i');
+            if (video.muted) {
+                video.muted = false;
+                volumeSlider.value = video.volume;
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-volume-up');
+            } else {
+                video.muted = true;
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-mute');
+            }
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+        // Function to set volume
+        function setVolume(slider) {
+            const videoContainer = slider.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const volumeButton = videoContainer.querySelector('.volume-button i');
+            video.volume = slider.value;
+            video.muted = (slider.value === 0);
+            // Update icon based on volume level
+            if (video.muted || video.volume === 0) {
+                volumeButton.classList.remove('fa-volume-up', 'fa-volume-down');
+                volumeButton.classList.add('fa-volume-mute');
+            } else if (video.volume < 0.5) {
+                volumeButton.classList.remove('fa-volume-up', 'fa-volume-mute');
+                volumeButton.classList.add('fa-volume-down');
+            } else {
+                volumeButton.classList.remove('fa-volume-down', 'fa-volume-mute');
+                volumeButton.classList.add('fa-volume-up');
+            }
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+        // Function to toggle fullscreen
+        function toggleFullscreen(button) {
+            const videoContainer = button.closest('.milestone-video-container, .milestone-video-container-large');
+            const video = videoContainer.querySelector('.milestone-video');
+            const icon = button.querySelector('i');
+            if (!document.fullscreenElement) {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.webkitRequestFullscreen) { /* Safari */
+                    videoContainer.webkitRequestFullscreen();
+                } else if (videoContainer.msRequestFullscreen) { /* IE11 */
+                    videoContainer.msRequestFullscreen();
+                }
+                icon.classList.remove('fa-expand');
+                icon.classList.add('fa-compress');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+                icon.classList.remove('fa-compress');
+                icon.classList.add('fa-expand');
+            }
+            // Prevent triggering the card's click event
+            event.stopPropagation();
+        }
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load messages from Netlify
+            loadMessages();
+            // Initialize all video elements
+            document.querySelectorAll('.milestone-video').forEach(video => {
+                updateVideoProgress(video);
+            });
+            // Close success message button
+            document.getElementById('close-success').addEventListener('click', hideSuccessMessage);
+            // Handle form submission
+            document.getElementById('guestbook-form').addEventListener('submit', function (e) {
+                console.log('Form submitted');
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const message = document.getElementById('message').value.trim();
+                console.log('Name:', name, 'Message:', message);
+                if (!name) {
+                    console.log('Name is empty');
+                    showErrorMessage('Please enter your name.');
+                    document.getElementById('name').focus();
+                    return;
+                }
+                if (!message) {
+                    console.log('Message is empty');
+                    showErrorMessage('Please enter a message.');
+                    document.getElementById('message').focus();
+                    return;
+                }
+                try {
+                    console.log('Processing form submission');
+                    // Show loading state
+                    showLoadingState(this, true);
+                    // Create new message object to display immediately
+                    const currentDate = new Date();
+                    const formattedDate = currentDate.toLocaleDateString();
+                    const newMessage = {
+                        author: name,
+                        date: formattedDate,
+                        content: message
+                    };
+                    console.log('New message object:', newMessage);
+                    // Add new message to DOM immediately
+                    addMessageToDOM(newMessage);
+                    // Submit the form using traditional form submission
+                    console.log('Submitting form using traditional method');
+                    // Create a temporary form element for submission
+                    const tempForm = document.createElement('form');
+                    tempForm.method = 'POST';
+                    tempForm.action = '/success.html'; // Redirect to success page
+                    tempForm.style.display = 'none';
+                    // Copy all form data to the temporary form
+                    const formData = new FormData(this);
+                    for (const [key, value] of formData.entries()) {
+                        const input = document.createElement('input');
+                        input.name = key;
+                        input.value = value;
+                        tempForm.appendChild(input);
+                    }
+                    // Add the temporary form to the document
+                    document.body.appendChild(tempForm);
+                    // Submit the form
+                    tempForm.submit();
+                    // Remove the temporary form after a short delay
+                    setTimeout(() => {
+                        document.body.removeChild(tempForm);
+                    }, 1000);
+                    // Show success message immediately
+                    showSuccessMessage();
+                    // Scroll to top of messages
+                    const messagesContainer = document.getElementById('messages-container');
+                    if (messagesContainer) {
+                        messagesContainer.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    // Reset form
+                    this.reset();
+                    // Hide loading state
+                    showLoadingState(this, false);
+                } catch (error) {
+                    console.error('Error in form submission:', error);
+                    showErrorMessage('There was an error saving your message. Please try again.');
+                    showLoadingState(this, false);
+                }
+            });
+        });
+        // Prevent right-click on images 
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('contextmenu', e => e.preventDefault());
+        });
+        // Disable print screen 
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                alert('Screenshots are disabled on this page.');
+            }
+        });
+        // Add watermark overlay to images 
+        document.querySelectorAll('.protected-image, .milestone-image, .random-photo').forEach(img => {
+            img.addEventListener('load', function () {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = this.naturalWidth;
+                canvas.height = this.naturalHeight;
+                ctx.drawImage(this, 0, 0);
+                // Add watermark 
+                ctx.font = '20px Quicksand';
+                ctx.fillStyle = 'rgba(255, 105, 180, 0.5)';
+                ctx.textAlign = 'center';
+                ctx.fillText('© Armani & Ameerah', canvas.width / 2, canvas.height - 20);
+                // Replace image with watermarked version 
+                this.src = canvas.toDataURL('image/jpeg');
+            });
+        });
+        // Add mobile-specific optimizations
+        if ('ontouchstart' in window) {
+            // Add touch feedback for mobile devices
+            document.querySelectorAll('.btn-submit, .nav-tab, .milestone-card').forEach(element => {
+                element.addEventListener('touchstart', function () {
+                    this.style.transform = 'scale(0.95)';
+                });
+                element.addEventListener('touchend', function () {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>
-"@
