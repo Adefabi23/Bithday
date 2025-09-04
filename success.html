@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +15,6 @@
             box-sizing: border-box;
             font-family: 'Quicksand', sans-serif;
         }
-
         body {
             background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
             min-height: 100vh;
@@ -27,7 +25,6 @@
             overflow-x: hidden;
             position: relative;
         }
-
         body::before {
             content: "";
             position: fixed;
@@ -41,7 +38,6 @@
                 radial-gradient(circle at 80% 80%, rgba(255, 182, 193, 0.2) 0%, transparent 20%);
             z-index: -1;
         }
-
         .success-container {
             max-width: 800px;
             margin: 0 auto;
@@ -49,19 +45,16 @@
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         .success-card {
             background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
@@ -72,7 +65,6 @@
             overflow: hidden;
             margin-bottom: 40px;
         }
-
         .success-card::before {
             content: '';
             position: absolute;
@@ -82,24 +74,20 @@
             height: 8px;
             background: linear-gradient(90deg, #ff69b4, #ff85c1, #ffb6c1);
         }
-
         .success-icon {
             font-size: 80px;
             color: #ff69b4;
             margin-bottom: 20px;
             animation: scaleIn 0.8s ease-out;
         }
-
         @keyframes scaleIn {
             from {
                 transform: scale(0);
             }
-
             to {
                 transform: scale(1);
             }
         }
-
         h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 3.5rem;
@@ -107,45 +95,37 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
         }
-
         .success-message {
             font-size: 1.5rem;
             color: #ff85c1;
             margin-bottom: 30px;
             font-weight: 500;
         }
-
         .baby-decoration {
             display: flex;
             justify-content: center;
             margin: 30px 0;
         }
-
         .baby-icon {
             font-size: 2rem;
             color: rgba(255, 105, 180, 0.6);
             margin: 0 15px;
             animation: float 3s infinite alternate ease-in-out;
         }
-
         .baby-icon:nth-child(2) {
             animation-delay: 0.5s;
         }
-
         .baby-icon:nth-child(3) {
             animation-delay: 1s;
         }
-
         @keyframes float {
             from {
                 transform: translateY(0);
             }
-
             to {
                 transform: translateY(-15px);
             }
         }
-
         .back-button {
             display: inline-block;
             background: linear-gradient(135deg, #ff69b4, #ff85c1);
@@ -163,7 +143,6 @@
             overflow: hidden;
             z-index: 1;
         }
-
         .back-button::before {
             content: '';
             position: absolute;
@@ -176,16 +155,13 @@
             transition: transform 0.5s ease;
             z-index: -1;
         }
-
         .back-button:hover::before {
             transform: translateX(0);
         }
-
         .back-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 20px rgba(255, 105, 180, 0.4);
         }
-
         .confetti {
             position: fixed;
             width: 10px;
@@ -195,19 +171,16 @@
             animation: confetti-fall 3s linear forwards;
             z-index: 1000;
         }
-
         @keyframes confetti-fall {
             0% {
                 transform: translateY(-100vh) rotate(0deg);
                 opacity: 1;
             }
-
             100% {
                 transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
             }
         }
-
         .footer {
             text-align: center;
             margin-top: 40px;
@@ -215,26 +188,21 @@
             font-size: 1rem;
             font-weight: 600;
         }
-
         .footer i {
             margin-right: 8px;
             color: #ff85c1;
         }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.8rem;
             }
-
             .success-message {
                 font-size: 1.2rem;
             }
-
             .success-card {
                 padding: 40px 20px;
             }
-
             .baby-icon {
                 font-size: 1.5rem;
                 margin: 0 10px;
@@ -242,7 +210,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="success-container">
         <div class="success-card">
@@ -267,30 +234,46 @@
     </div>
     <script>
         // Wait for DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Create confetti effect
             createConfetti();
-
+            
             // Setup back button functionality
             setupBackButton();
+            
+            // Check access control - IMPORTANT: This ensures expiration is implemented
+            checkAccessControl();
         });
+
+        function checkAccessControl() {
+            // Check if user is owner
+            const isOwner = localStorage.getItem('isOwner') === 'true';
+            
+            // Check if user has already accessed
+            const hasAccessed = localStorage.getItem('hasAccessed') === 'true';
+            
+            // If not owner and has already accessed, redirect to expired page
+            if (!isOwner && hasAccessed) {
+                window.location.href = 'expired.html';
+            }
+        }
 
         function createConfetti() {
             const colors = ['#ff69b4', '#ff85c1', '#ffb6c1', '#ffc0cb', '#ffe0f0'];
-
+            
             // Create 100 confetti pieces
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
-
+                    
                     // Random properties
                     const size = Math.random() * 10 + 5;
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     const left = Math.random() * 100;
                     const animationDuration = Math.random() * 3 + 2;
                     const opacity = Math.random() * 0.5 + 0.5;
-
+                    
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
                     confetti.style.backgroundColor = color;
@@ -299,9 +282,9 @@
                     confetti.style.opacity = opacity;
                     confetti.style.animationDuration = `${animationDuration}s`;
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-
+                    
                     document.body.appendChild(confetti);
-
+                    
                     // Remove confetti after animation completes
                     setTimeout(() => {
                         confetti.remove();
@@ -312,10 +295,10 @@
 
         function setupBackButton() {
             const backButton = document.getElementById('back-button');
-
-            backButton.addEventListener('click', function (e) {
+            
+            backButton.addEventListener('click', function(e) {
                 e.preventDefault();
-
+                
                 // Check if the user is the owner
                 if (localStorage.getItem('isOwner') === 'true') {
                     // Owner can go back to the main site
@@ -329,5 +312,4 @@
         }
     </script>
 </body>
-
 </html>

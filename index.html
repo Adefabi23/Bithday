@@ -1043,30 +1043,45 @@
             background-color: rgba(255, 255, 255, 0.3);
         }
     </style>
-    <!-- Access Control Script -->
-            <script>
-        // If URL has owner parameter, set owner flag
+    <!-- Enhanced Access Control Script -->
+    <script>
+        // Check if URL has owner parameter
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('owner') === 'true') {
             localStorage.setItem('isOwner', 'true');
-            // Clear any existing access flag to ensure clean state
+            // Clear any existing access flags to ensure clean state
             localStorage.removeItem('hasAccessed');
+            localStorage.removeItem('hasSubmitted');
         }
 
-        // If the user is the owner, allow access
-        if (localStorage.getItem('isOwner') === 'true') {
-            // Continue to load the page
-            console.log('Owner access granted');
-        } 
-        // If the user has accessed before and is not the owner, redirect to expired
-        else if (localStorage.getItem('hasAccessed') === 'true') {
-            console.log('Redirecting to expired page - user has already accessed');
+        // Check if user is owner
+        const isOwner = localStorage.getItem('isOwner') === 'true';
+
+        // Check if user has already submitted the form
+        const hasSubmitted = localStorage.getItem('hasSubmitted') === 'true';
+
+        // If not owner and has already submitted, redirect to expired page
+        if (!isOwner && hasSubmitted) {
+            console.log('Redirecting to expired page - user has already submitted');
             window.location.href = 'expired.html';
         }
-        // Otherwise, it's the first time for a regular user, set the flag
-        else {
+        // If not owner but hasn't submitted yet, check if they've accessed before
+        else if (!isOwner && localStorage.getItem('hasAccessed') === 'true') {
+            // They've accessed before but haven't submitted - allow access
+            console.log('Returning user who has not submitted yet - allowing access');
+        }
+        // Otherwise, it's the first time for a regular user, set the access flag
+        else if (!isOwner) {
             console.log('First time access - setting access flag');
             localStorage.setItem('hasAccessed', 'true');
+        }
+
+        // Function to mark form as submitted
+        function markFormSubmitted() {
+            if (!isOwner) {
+                localStorage.setItem('hasSubmitted', 'true');
+                console.log('Form submitted - setting hasSubmitted flag');
+            }
         }
     </script>
 </head>
@@ -1599,13 +1614,13 @@
     </div>
     <div class="watermark">© Armani & Ameerah's First Year</div>
     <!-- Overlay and Success Message -->
-    <div class="overlay" id="overlay"></div>
+    <!-- <div class="overlay" id="overlay"></div>
     <div class="success-message" id="success-message">
         <i class="fas fa-check-circle"></i>
         <h3>Thank You!</h3>
         <p>Your message has been saved successfully!</p>
         <button class="btn-close" id="close-success">Continue</button>
-    </div>
+    </div> -->
     <script>
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1973,6 +1988,8 @@
                     console.log('New message object:', newMessage);
                     // Add new message to DOM immediately
                     addMessageToDOM(newMessage);
+                    // Mark form as submitted for expiration
+                    markFormSubmitted();
                     // Submit the form using traditional form submission
                     console.log('Submitting form using traditional method');
                     // Create a temporary form element for submission
@@ -2061,4 +2078,3 @@
 </body>
 
 </html>
-
