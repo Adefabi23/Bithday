@@ -1148,6 +1148,15 @@
             localStorage.setItem('hasAccessed', 'true');
         }
         // If owner, allow access without setting any flags
+
+        
+fetch('/.netlify/functions/track-visit')
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    });
+        
     </script>
 </head>
 
