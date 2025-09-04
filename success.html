@@ -252,18 +252,15 @@
             <h1>Thank You!</h1>
             <p class="success-message">Your form submission has been received.</p>
             <p>We appreciate your birthday message for Armani & Ameerah!</p>
-
             <div class="baby-decoration">
                 <div class="baby-icon"><i class="fas fa-baby"></i></div>
                 <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
                 <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
             </div>
-
-            <a href="index.html" class="back-button">
+            <a href="#" id="back-button" class="back-button">
                 <i class="fas fa-arrow-left"></i> Back to our site
             </a>
         </div>
-
         <div class="footer">
             <i class="fas fa-heart"></i> Armani & Ameerah's First Year <i class="fas fa-heart"></i>
         </div>
@@ -273,6 +270,7 @@
         // Create confetti effect on page load
         window.addEventListener('load', function () {
             createConfetti();
+            setupBackButton();
         });
 
         function createConfetti() {
@@ -281,14 +279,12 @@
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
-
                     // Random properties
                     const size = Math.random() * 10 + 5;
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     const left = Math.random() * 100;
                     const animationDuration = Math.random() * 3 + 2;
                     const opacity = Math.random() * 0.5 + 0.5;
-
                     confetti.style.width = `${size}px`;
                     confetti.style.height = `${size}px`;
                     confetti.style.backgroundColor = color;
@@ -297,15 +293,36 @@
                     confetti.style.opacity = opacity;
                     confetti.style.animationDuration = `${animationDuration}s`;
                     confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-
                     document.body.appendChild(confetti);
-
                     // Remove confetti after animation completes
                     setTimeout(() => {
                         confetti.remove();
                     }, animationDuration * 1000);
                 }, i * 30);
             }
+        }
+
+        function setupBackButton() {
+            const backButton = document.getElementById('back-button');
+
+            backButton.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Check if the user is the owner
+                if (localStorage.getItem('isOwner') === 'true') {
+                    // Owner can go back to the main site
+                    window.location.href = 'index.html';
+                }
+                // Check if the user has already accessed the site
+                else if (localStorage.getItem('hasAccessed') === 'true') {
+                    // Regular user who has already accessed - redirect to expired page
+                    window.location.href = 'expired.html';
+                } else {
+                    // First time visitor - allow access to main site
+                    localStorage.setItem('hasAccessed', 'true');
+                    window.location.href = 'index.html';
+                }
+            });
         }
     </script>
 </body>
