@@ -319,7 +319,31 @@
             }
         }
     </style>
-</head>
+    <script>
+        // Prevent going back to the main page
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function(event) {
+            history.pushState(null, null, location.href);
+        });
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Disable backspace
+            if (e.key === 'Backspace') {
+                e.preventDefault();
+            }
+            // Disable Alt + Left Arrow
+            if (e.altKey && e.key === 'ArrowLeft') {
+                e.preventDefault();
+            }
+        });
+    </script></head>
 
 <body>
     <div class="decorative-elements">

@@ -75,7 +75,7 @@
     <div class="container">
         <h1>Owner Access Bookmarklet</h1>
         <p>Drag this button to your bookmarks bar or right-click and save as a bookmark:</p>
-        <a href="javascript:(function(){window.location.href='https://happybithdayarmani-ameeerah.netlify.app/?owner=true';})();" class="bookmarklet">Owner Access</a>
+        <a href="javascript:(function(){localStorage.setItem('isOwner','true');localStorage.removeItem('hasAccessed');window.location.href='https://happybithdayarmani-ameeerah.netlify.app/';})();" class="bookmarklet">Owner Access</a>
         
         <div class="instructions">
             <h3>How to use:</h3>
@@ -89,3 +89,4 @@
     </div>
 </body>
 </html>
+

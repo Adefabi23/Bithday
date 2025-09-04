@@ -1044,23 +1044,28 @@
         }
     </style>
     <!-- Access Control Script -->
-        <script>
+            <script>
         // If URL has owner parameter, set owner flag
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('owner') === 'true') {
             localStorage.setItem('isOwner', 'true');
+            // Clear any existing access flag to ensure clean state
+            localStorage.removeItem('hasAccessed');
         }
 
         // If the user is the owner, allow access
         if (localStorage.getItem('isOwner') === 'true') {
             // Continue to load the page
+            console.log('Owner access granted');
         } 
         // If the user has accessed before and is not the owner, redirect to expired
         else if (localStorage.getItem('hasAccessed') === 'true') {
+            console.log('Redirecting to expired page - user has already accessed');
             window.location.href = 'expired.html';
         }
         // Otherwise, it's the first time for a regular user, set the flag
         else {
+            console.log('First time access - setting access flag');
             localStorage.setItem('hasAccessed', 'true');
         }
     </script>
@@ -2056,3 +2061,4 @@
 </body>
 
 </html>
+
