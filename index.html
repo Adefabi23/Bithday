@@ -735,86 +735,156 @@
         }
 
         /* Success Message - Enhanced */
-        .success-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
-            color: #ff69b4;
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 105, 180, 0.2);
-            max-width: 90%;
-            width: 400px;
-        }
-
-        .success-message.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .success-message i {
-            font-size: 50px;
-            color: #ff69b4;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .success-message h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #ff69b4;
-        }
-
-        .success-message p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #ff85c1;
-        }
-
-        .success-message .btn-close {
-            background: linear-gradient(135deg, #ff69b4, #ff85c1);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-        }
-
-        .success-message .btn-close:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.4);
-        }
-
-        /* Overlay for success message */
-        .overlay {
+        .success-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
         }
 
-        .overlay.show {
+        .success-overlay.show {
             opacity: 1;
             visibility: visible;
+        }
+
+        .success-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .success-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px 30px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #ff69b4, #ff85c1, #ffb6c1);
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-card h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+        }
+
+        .success-message {
+            font-size: 1.5rem;
+            color: #ff85c1;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .baby-decoration {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .baby-icon {
+            font-size: 2rem;
+            color: rgba(255, 105, 180, 0.6);
+            margin: 0 15px;
+            animation: float 3s infinite alternate ease-in-out;
+        }
+
+        .baby-icon:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .baby-icon:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-15px);
+            }
+        }
+
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4, #ff85c1);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 15px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            z-index: -1;
+        }
+
+        .back-button:hover::before {
+            transform: translateX(0);
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(255, 105, 180, 0.4);
         }
 
         /* Random Photos Section - Enhanced Styles */
@@ -989,13 +1059,21 @@
                 font-size: 1rem;
             }
 
-            .success-message {
-                width: 90%;
-                padding: 20px;
+            .success-card {
+                padding: 40px 20px;
             }
 
-            .success-message h3 {
+            .success-card h1 {
+                font-size: 2.8rem;
+            }
+
+            .success-message {
+                font-size: 1.2rem;
+            }
+
+            .baby-icon {
                 font-size: 1.5rem;
+                margin: 0 10px;
             }
 
             /* Keep larger images on mobile */
@@ -1051,38 +1129,25 @@
             localStorage.setItem('isOwner', 'true');
             // Clear any existing access flags to ensure clean state
             localStorage.removeItem('hasAccessed');
-            localStorage.removeItem('hasSubmitted');
         }
 
         // Check if user is owner
         const isOwner = localStorage.getItem('isOwner') === 'true';
 
-        // Check if user has already submitted the form
-        const hasSubmitted = localStorage.getItem('hasSubmitted') === 'true';
+        // Check if user has already accessed the site
+        const hasAccessed = localStorage.getItem('hasAccessed') === 'true';
 
-        // If not owner and has already submitted, redirect to expired page
-        if (!isOwner && hasSubmitted) {
-            console.log('Redirecting to expired page - user has already submitted');
+        // If not owner and has already accessed, redirect to expired page
+        if (!isOwner && hasAccessed) {
+            console.log('Redirecting to expired page - user has already accessed');
             window.location.href = 'expired.html';
-        }
-        // If not owner but hasn't submitted yet, check if they've accessed before
-        else if (!isOwner && localStorage.getItem('hasAccessed') === 'true') {
-            // They've accessed before but haven't submitted - allow access
-            console.log('Returning user who has not submitted yet - allowing access');
         }
         // Otherwise, it's the first time for a regular user, set the access flag
         else if (!isOwner) {
             console.log('First time access - setting access flag');
             localStorage.setItem('hasAccessed', 'true');
         }
-
-        // Function to mark form as submitted
-        function markFormSubmitted() {
-            if (!isOwner) {
-                localStorage.setItem('hasSubmitted', 'true');
-                console.log('Form submitted - setting hasSubmitted flag');
-            }
-        }
+        // If owner, allow access without setting any flags
     </script>
 </head>
 
@@ -1613,14 +1678,29 @@
         </div>
     </div>
     <div class="watermark">© Armani & Ameerah's First Year</div>
-    <!-- Overlay and Success Message -->
-    <!-- <div class="overlay" id="overlay"></div>
-    <div class="success-message" id="success-message">
-        <i class="fas fa-check-circle"></i>
-        <h3>Thank You!</h3>
-        <p>Your message has been saved successfully!</p>
-        <button class="btn-close" id="close-success">Continue</button>
-    </div> -->
+
+    <!-- New Success Message Overlay -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-container">
+            <div class="success-card">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Thank You!</h1>
+                <p class="success-message">Your form submission has been received.</p>
+                <p>We appreciate your birthday message for Armani & Ameerah!</p>
+                <div class="baby-decoration">
+                    <div class="baby-icon"><i class="fas fa-baby"></i></div>
+                    <div class="baby-icon"><i class="fas fa-baby-carriage"></i></div>
+                    <div class="baby-icon"><i class="fas fa-bottle-baby"></i></div>
+                </div>
+                <a href="#" id="back-button" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to our site
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Navigation tabs functionality 
         document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1719,25 +1799,16 @@
         }
         // Function to show success message
         function showSuccessMessage() {
-            const successMessage = document.getElementById('success-message');
-            const overlay = document.getElementById('overlay');
-            // Show overlay and success message
-            overlay.classList.add('show');
-            successMessage.classList.add('show');
+            const successOverlay = document.getElementById('success-overlay');
+            successOverlay.classList.add('show');
+
             // Create confetti effect
             createConfetti({ pageY: window.innerHeight / 2 });
         }
         // Function to hide success message
         function hideSuccessMessage() {
-            const successMessage = document.getElementById('success-message');
-            const overlay = document.getElementById('overlay');
-            // Hide overlay and success message
-            overlay.classList.remove('show');
-            successMessage.classList.remove('show');
-            // Redirect to success page after closing
-            setTimeout(() => {
-                window.location.href = 'success.html';
-            }, 500);
+            const successOverlay = document.getElementById('success-overlay');
+            successOverlay.classList.remove('show');
         }
         // Function to show error message
         function showErrorMessage(message) {
@@ -1952,8 +2023,21 @@
             document.querySelectorAll('.milestone-video').forEach(video => {
                 updateVideoProgress(video);
             });
-            // Close success message button
-            document.getElementById('close-success').addEventListener('click', hideSuccessMessage);
+
+            // Setup back button click handler
+            document.getElementById('back-button').addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Check if the user is the owner
+                if (localStorage.getItem('isOwner') === 'true') {
+                    // Owner can go back to the main site
+                    window.location.href = 'index.html';
+                } else {
+                    // For all other users, redirect to expired page
+                    window.location.href = 'expired.html';
+                }
+            });
+
             // Handle form submission
             document.getElementById('guestbook-form').addEventListener('submit', function (e) {
                 console.log('Form submitted');
@@ -1988,8 +2072,6 @@
                     console.log('New message object:', newMessage);
                     // Add new message to DOM immediately
                     addMessageToDOM(newMessage);
-                    // Mark form as submitted for expiration
-                    markFormSubmitted();
                     // Submit the form using traditional form submission
                     console.log('Submitting form using traditional method');
                     // Create a temporary form element for submission
