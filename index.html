@@ -249,17 +249,17 @@
         }
 
         /* Positioning for 3 cards */
-        .timeline-item:nth-child(1) {
+        .timeline-item:nth-child(3n+1) {
             margin-right: auto;
             margin-left: 0;
         }
 
-        .timeline-item:nth-child(2) {
+        .timeline-item:nth-child(3n+2) {
             margin-left: auto;
             margin-right: auto;
         }
 
-        .timeline-item:nth-child(3) {
+        .timeline-item:nth-child(3n+3) {
             margin-left: auto;
             margin-right: 0;
         }
@@ -277,17 +277,20 @@
         }
 
         /* Positioning for timeline dots */
-        .timeline-item:nth-child(1)::before {
+        .timeline-item:nth-child(3n+1)::before {
             right: -60px;
+            left: auto;
         }
 
-        .timeline-item:nth-child(2)::before {
+        .timeline-item:nth-child(3n+2)::before {
             left: 50%;
+            right: auto;
             transform: translateX(-50%);
         }
 
-        .timeline-item:nth-child(3)::before {
+        .timeline-item:nth-child(3n+3)::before {
             left: -60px;
+            right: auto;
         }
 
         .baby-name {
@@ -1149,14 +1152,14 @@
         }
         // If owner, allow access without setting any flags
 
-        
-fetch('/.netlify/functions/track-visit')
-    .then(response => {
-        if (response.redirected) {
-            window.location.href = response.url;
-        }
-    });
-        
+
+        fetch('/.netlify/functions/track-visit')
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            });
+
     </script>
 </head>
 
@@ -1387,31 +1390,85 @@ fetch('/.netlify/functions/track-visit')
                     <div class="month-label">Month 12</div>
                     <div class="timeline-content">
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Armani</div>
+                            <div class="baby-name"><i class="fas fa-birthday-cake"></i> We are a year old!</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/armanibaby12/600/400.jpg" alt="Armani Month 12"
+                                <img src="https://picsum.photos/seed/birthday1/600/400.jpg" alt="Birthday Celebration 1"
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First birthday celebration</p>
+                            <p>Our first birthday cake!</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i> Ameerah</div>
+                            <div class="baby-name"><i class="fas fa-gift"></i> We are a year old!</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/ameerahbaby12/600/400.jpg" alt="Ameerah Month 12"
+                                <img src="https://picsum.photos/seed/birthday2/600/400.jpg" alt="Birthday Celebration 2"
                                     class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>Taking first steps</p>
+                            <p>Playing with our new toys!</p>
                         </div>
                         <div class="timeline-item">
-                            <div class="baby-name"><i class="fas fa-venus"></i><i class="fas fa-venus"></i> Both</div>
+                            <div class="baby-name"><i class="fas fa-camera"></i> We are a year old!</div>
                             <div class="media-container">
-                                <img src="https://picsum.photos/seed/twinstogether12/600/400.jpg"
-                                    alt="Both Twins Month 12" class="protected-image">
+                                <img src="https://picsum.photos/seed/birthday3/600/400.jpg" alt="Birthday Celebration 3"
+                                    class="protected-image">
                                 <div class="media-overlay"></div>
                             </div>
-                            <p>First birthday party</p>
+                            <p>Family portrait time!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-fire"></i> We are a year old!</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/birthday4/600/400.jpg" alt="Birthday Celebration 4"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Blowing out the candles!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-box-open"></i> We are a year old!</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/birthday5/600/400.jpg" alt="Birthday Celebration 5"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Opening our presents!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-cookie-bite"></i> We are a year old!</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/birthday6/600/400.jpg" alt="Birthday Celebration 6"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>First taste of birthday cake!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-child"></i> We are a year old!</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/birthday7/600/400.jpg" alt="Birthday Celebration 7"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Playing with our friends!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-hat-wizard"></i> We are a year old!</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/birthday8/600/400.jpg" alt="Birthday Celebration 8"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Wearing our birthday hats!</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="baby-name"><i class="fas fa-star"></i> We are a year old!</div>
+                            <div class="media-container">
+                                <img src="https://picsum.photos/seed/birthday9/600/400.jpg" alt="Birthday Celebration 9"
+                                    class="protected-image">
+                                <div class="media-overlay"></div>
+                            </div>
+                            <p>Happy first birthday to us!</p>
                         </div>
                     </div>
                 </div>
